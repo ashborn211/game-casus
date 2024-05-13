@@ -185,7 +185,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 767e032d74b4cec45bfcefc625365386, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 465744333}
   - component: {fileID: 465744332}
   - component: {fileID: 465744331}
+  - component: {fileID: 465744335}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -367,6 +368,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 469227717}
   m_LocalEulerAnglesHint: {x: 35.26, y: 45, z: 0}
+--- !u!114 &465744335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465744330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a768e6421c659141ba6930dbadf38fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &469227714
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e88c0f8e3d7b6147a6fc2913f89dbb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
+  camAngel: 45
 --- !u!54 &469227716
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -503,7 +517,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 1a5909271793bc243987b781c26b7f42, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

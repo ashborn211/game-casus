@@ -8,33 +8,44 @@ public class movmentPlayer : MonoBehaviour
     private float inputDirX;
     private float inputDirZ;
     public float moveSpeed = 5;
+    public float camAngel = 45;
+    private float lastDirection;
+    private Vector3 velocity;
+
     // Start is called before the first frame update
     void Start()
     {
-                rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        inputDirX = Input.GetAxis("Horizontal");
-        inputDirZ = Input.GetAxis("Vertical");
-
-
-        rb.velocity = new Vector3( inputDirX*moveSpeed, rb.velocity.y, inputDirZ*moveSpeed);
-    }
-
-    public float TrueDir(float dirA,float dirB){
-        return (dirA+dirB)/2*Mathf.Cos(Mathf.Atan(dirA/dirB));
-    }
-
-    public float TrueDir2(float dirA,float dirB){
-        if(dirA > dirB){
-            return dirA*Mathf.Cos(Mathf.Atan(dirB/dirA)/*+cam.GetYRotation()*-1*/);
-            
+        inputDirX = Input.GetAxisRaw("Horizontal");
+        inputDirZ = Input.GetAxisRaw("Vertical");
+        if(inputDirX != 0 || inputDirZ != 0){
+            if(inputDirZ >= 0){
+                velocity = Velocity(moveSpeed, Direction(inputDirX*-1, inputDirZ) - camAngel + 90);
+                lastDirection = Direction(inputDirX*-1, inputDirZ) - camAngel + 90;
+            }
+            else{
+                velocity = Velocity(moveSpeed, Direction(inputDirX, inputDirZ*-1) - camAngel - 90);
+                lastDirection = Direction(inputDirX*-1, inputDirZ);
+            }
         }
         else{
-            return dirB*Mathf.Cos(Mathf.Atan(dirB/dirA)/*+cam.GetYRotation()*-1*/);
+            velocity = new Vector3(0, rb.velocity.y , 0);
         }
+
+        rb.velocity = velocity;
+    }
+
+    public Vector3 Velocity(float speed,float angle){
+        return new Vector3(speed*Mathf.Cos(angle/180*Mathf.PI), rb.velocity.y ,speed*Mathf.Sin(angle/180*Mathf.PI));
+    }
+
+    public float Direction(float fDirX,float fDirZ){
+
+        return Mathf.Atan(fDirX/fDirZ)*180/Mathf.PI;
     }
 }
