@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class movmentPlayer : MonoBehaviour
+public class movementPlayer : MonoBehaviour
 {
     private Rigidbody rb;
     private float inputDirX;
