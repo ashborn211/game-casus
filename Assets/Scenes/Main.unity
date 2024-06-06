@@ -3870,16 +3870,16 @@ MonoBehaviour:
   - {fileID: 1212089959}
   - {fileID: 702050769}
   - {fileID: 1070080370}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 459600248}
   - {fileID: 1177324503}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   hotbarSlots:
   - {fileID: 0}
   - {fileID: 0}
