@@ -21,6 +21,15 @@ public class movmentPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (rb.position.y <= 2.8)
+        {
+            moveSpeed = 2;
+        }
+        else
+        {
+            moveSpeed = 5;
+        }
+
         inputDirX = Input.GetAxisRaw("Horizontal");
         inputDirZ = Input.GetAxisRaw("Vertical");
         if(inputDirX != 0 || inputDirZ != 0){
