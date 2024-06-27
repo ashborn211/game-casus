@@ -7,7 +7,7 @@ public class movementPlayer : MonoBehaviour
     private Rigidbody rb;
     private float inputDirX;
     private float inputDirZ;
-    public float moveSpeed = 5;
+    public float moveSpeed = 7;
     public float camAngel = 45;
     private float lastDirection;
     private Vector3 velocity;
@@ -23,11 +23,11 @@ public class movementPlayer : MonoBehaviour
     {
         if (rb.position.y <= 2.8)
         {
-            moveSpeed = 2;
+            moveSpeed = 3;
         }
         else
         {
-            moveSpeed = 5;
+            moveSpeed = 7;
         }
 
         inputDirX = Input.GetAxisRaw("Horizontal");
