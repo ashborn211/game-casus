@@ -6623,8 +6623,13 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_LocalEulerAnglesHint: {x: -6.316, y: 83.269, z: 0.318}
 --- !u!1 &244218316
+=======
+  m_LocalEulerAnglesHint: {x: -1.957, y: -10.238, z: 0.896}
+--- !u!1 &238317357
+>>>>>>> origin/Attack-update-and-enemy-ai-update
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6632,17 +6637,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 244218320}
   - component: {fileID: 244218319}
   - component: {fileID: 244218318}
   - component: {fileID: 244218317}
   m_Layer: 0
   m_Name: Cube (237)
+=======
+  - component: {fileID: 238317358}
+  - component: {fileID: 238317361}
+  - component: {fileID: 238317360}
+  m_Layer: 0
+  m_Name: Cube
+>>>>>>> origin/Attack-update-and-enemy-ai-update
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!65 &244218317
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6715,11 +6729,15 @@ MeshFilter:
   m_GameObject: {fileID: 244218316}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &244218320
+=======
+--- !u!4 &238317358
+>>>>>>> origin/Attack-update-and-enemy-ai-update
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 244218316}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12436052, y: -0.019176222, z: -0.15118618, w: 0.980464}
@@ -6980,11 +6998,24 @@ BoxCollider:
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &258408138
+=======
+  m_GameObject: {fileID: 238317357}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0.53}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 295451438}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &238317360
+>>>>>>> origin/Attack-update-and-enemy-ai-update
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 258408136}
   m_Enabled: 1
   m_CastShadows: 1
@@ -7196,6 +7227,9 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269004731}
+=======
+  m_GameObject: {fileID: 238317357}
+>>>>>>> origin/Attack-update-and-enemy-ai-update
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -7231,12 +7265,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+<<<<<<< HEAD
 --- !u!33 &269004734
+=======
+--- !u!33 &238317361
+>>>>>>> origin/Attack-update-and-enemy-ai-update
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 269004731}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &269004735
@@ -7464,6 +7503,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 13.894}
+=======
+  m_GameObject: {fileID: 238317357}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+>>>>>>> origin/Attack-update-and-enemy-ai-update
 --- !u!1001 &280145653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7932,7 +7975,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 238317358}
   m_Father: {fileID: 1595491468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &295451439
@@ -7954,7 +7998,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.1, z: 1}
+  m_Size: {x: 1, y: 0.1, z: 1.75}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!114 &295451440
 MonoBehaviour:
@@ -7968,7 +8012,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2dd4f23c6bb86548b7cf62a41551f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!1 &299122677
+=======
+  boxCollider: {fileID: 295451439}
+--- !u!1 &299346746
+>>>>>>> origin/Attack-update-and-enemy-ai-update
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44761,6 +44810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  parent: {fileID: 1109560409}
 --- !u!136 &1858634019
 CapsuleCollider:
   m_ObjectHideFlags: 0
