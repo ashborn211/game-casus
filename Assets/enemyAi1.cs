@@ -9,7 +9,7 @@ public class enemyAi1 : MonoBehaviour
     public movementPlayer movementPlayer;
 
     public float test2 = 0;
-    public float movementSpeed = (float)9.5;
+    public float movementSpeed = (float)6.0;
 
     private Vector3 velocity;
     
@@ -26,14 +26,22 @@ public class enemyAi1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (rb.position.y <= 2.8)
+        {
+            movementSpeed = (float)4.5;
+        }
+        else
+        {
+            movementSpeed = 6;
+        }
         test2 = Distance(transform.position.x, transform.position.z, movementPlayer.transform.position.x, movementPlayer.transform.position.z);
-        if(test2 > 1.5){
+        if((test2 > 1.5) && (test2 < 20.0)){
             rb.velocity = Vel();
         }
         else{
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
-        
     }
 
     // float Angle(float x1, float y1, float x2, float y2)

@@ -23,7 +23,7 @@ public class movementPlayer : MonoBehaviour
     {
         if (rb.position.y <= 2.8)
         {
-            moveSpeed = 3;
+            moveSpeed = 5;
         }
         else
         {

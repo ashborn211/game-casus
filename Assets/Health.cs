@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     public int maxHealth = 10;
     private int health;
     private GameObject objectGame;
+    public GameObject parent;
     private bool death = false;
     // public HealtText healtText;
     // public HealthSlider healthSlider;
@@ -25,6 +26,7 @@ public class Health : MonoBehaviour
         if(health <=0 && !death){
             Debug.Log(objectGame.name + " death");
             death = true;
+            Destroy(parent);
             Destroy(gameObject);
         }
     }

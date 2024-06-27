@@ -19,16 +19,8 @@ public class Attack : MonoBehaviour
             
         // Debug.Log(mousePos.x + " x " + mousePos.y + " y of the " + Screen.width + " x " + Screen.height + " y");
         // Debug.Log(Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y));
-        mc.localRotation = Quaternion.Euler(0,Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+45,0);
-    
-        if (Input.GetButtonDown("Fire1"))
-        {
-            
-            
-            
+        mc.localRotation = Quaternion.Euler(0,Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135,0);
 
-
-        }
     
     }
 
