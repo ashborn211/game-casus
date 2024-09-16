@@ -7279,7 +7279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: -147.97}
+  m_AnchoredPosition: {x: -100, y: -10}
   m_SizeDelta: {x: 360.0665, y: 54.0518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &304997640
@@ -7318,9 +7318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bcc1a345cf789e4490359976c0ca826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryCanvas: {fileID: 0}
-  hotbarCanvas: {fileID: 0}
-  hotbar: {fileID: 0}
 --- !u!1 &309505983
 GameObject:
   m_ObjectHideFlags: 0
@@ -33889,6 +33886,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1415950059}
+  - component: {fileID: 1415950060}
   m_Layer: 5
   m_Name: hotbar
   m_TagString: Untagged
@@ -33911,11 +33909,24 @@ RectTransform:
   - {fileID: 304997639}
   m_Father: {fileID: 525430559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 14, y: -140}
   m_SizeDelta: {x: 375, y: 350}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1415950060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415950058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49cb10c59d924f34caa62bb324ebde6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 20, y: 20}
 --- !u!1 &1422484956
 GameObject:
   m_ObjectHideFlags: 0
