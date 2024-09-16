@@ -1,15 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class AttacColider : MonoBehaviour
+public class AttackColiderSword : MonoBehaviour
 {
     private int attackDamge = 5;
-    public BoxCollider boxCollider;
+    private MeshCollider boxCollider;
+    private Transform transformer;
+    
     // Start is called before the first frame update
     void Start()
     {
+        boxCollider = GetComponent<MeshCollider>();
+        transformer = transform.GetComponent<Transform>();
+        SetWeaponSize((float)0.75);
+        
+        
         
     }
 
@@ -24,6 +32,7 @@ public class AttacColider : MonoBehaviour
             boxCollider.enabled = false;
             Debug.Log("false");
         }
+        
     }
 
     private void OnTriggerEnter(Collider collider){
@@ -37,4 +46,8 @@ public class AttacColider : MonoBehaviour
         attackDamge = damage;
     }
     
+    public void SetWeaponSize(float size){
+        transformer.localPosition = new Vector3(0, 0, math.sqrt(2)*size);
+        transformer.localScale = new Vector3(100*size, 100*size, 20);
+    }
 }
