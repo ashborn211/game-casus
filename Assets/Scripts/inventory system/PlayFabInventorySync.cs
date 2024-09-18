@@ -2,10 +2,12 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
+using System.Collections;
 
 public class PlayFabInventorySync : MonoBehaviour
 {
     public InventoryDatabase localInventory;
+    private bool isLoggedIn = false;
 
     void Start()
     {
@@ -15,16 +17,23 @@ public class PlayFabInventorySync : MonoBehaviour
             return;
         }
 
-        // Use the updated IsLoggedIn property
-        if (PlayFabLogin.IsLoggedIn)
+        // Start the coroutine to check login status
+        StartCoroutine(CheckLoginStatus());
+    }
+
+    private IEnumerator CheckLoginStatus()
+    {
+        // Wait until the user is logged in
+        while (!PlayFabLogin.IsLoggedIn)
         {
-            LoadInventoryFromPlayFab();
+            Debug.Log("Waiting for login...");
+            yield return new WaitForSeconds(1f); // Check every 1 second
         }
-        else
-        {
-            Debug.Log("Not logged in yet.");
-            // Optionally handle this scenario, e.g., retry after some delay
-        }
+
+        // Set the flag to true once logged in
+        isLoggedIn = true;
+        Debug.Log("Logged in. Loading inventory.");
+        LoadInventoryFromPlayFab();
     }
 
     public void AddItemToInventory(Item item, int qty)
@@ -48,6 +57,12 @@ public class PlayFabInventorySync : MonoBehaviour
 
     public void SaveInventoryToPlayFab()
     {
+        if (!isLoggedIn)
+        {
+            Debug.LogError("Not logged in. Cannot save inventory.");
+            return;
+        }
+
         List<ItemSaveData> itemsToSave = localInventory.GetItems();
         string json = JsonUtility.ToJson(new ItemListWrapper { items = itemsToSave });
         Debug.Log("Inventory JSON to save: " + json);
@@ -58,32 +73,36 @@ public class PlayFabInventorySync : MonoBehaviour
                 { "inventory", json }
             }
         },
-        result => {
+        result =>
+        {
             Debug.Log("Inventory saved to PlayFab.");
         },
-        error => {
+        error =>
+        {
             Debug.LogError("Error saving inventory: " + error.GenerateErrorReport());
         });
     }
 
     public void LoadInventoryFromPlayFab()
     {
-        if (PlayFabLogin.IsLoggedIn)
-        {
-            PlayFabClientAPI.GetUserData(new GetUserDataRequest(),
-            result => {
-                if (result.Data != null && result.Data.ContainsKey("inventory"))
-                {
-                    string json = result.Data["inventory"].Value;
-                    ItemListWrapper wrapper = JsonUtility.FromJson<ItemListWrapper>(json);
-                    localInventory.SetItems(wrapper.items);
-                }
-            },
-            error => Debug.LogError("Error loading inventory: " + error.GenerateErrorReport()));
-        }
-        else
+        if (!isLoggedIn)
         {
             Debug.LogError("Not logged in. Cannot load inventory.");
+            return;
         }
+
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(),
+        result =>
+        {
+            if (result.Data != null && result.Data.ContainsKey("inventory"))
+            {
+                string json = result.Data["inventory"].Value;
+                ItemListWrapper wrapper = JsonUtility.FromJson<ItemListWrapper>(json);
+                localInventory.SetItems(wrapper.items);
+                Debug.Log("Inventory loaded from PlayFab.");
+                Debug.Log("Inventory JSON loaded: " + json);
+            }
+        },
+        error => Debug.LogError("Error loading inventory: " + error.GenerateErrorReport()));
     }
 }
