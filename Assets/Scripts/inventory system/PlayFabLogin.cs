@@ -4,14 +4,15 @@ using PlayFab.ClientModels;
 
 public class PlayFabLogin : MonoBehaviour
 {
-    public string playFabId;
+    public static bool IsLoggedIn { get; private set; } = false;
 
     void Start()
     {
-        LoginWithPlayFab();
+        // Example login procedure
+        Login();
     }
 
-    void LoginWithPlayFab()
+    private void Login()
     {
         var request = new LoginWithCustomIDRequest
         {
@@ -19,16 +20,18 @@ public class PlayFabLogin : MonoBehaviour
             CreateAccount = true
         };
 
-        PlayFabClientAPI.LoginWithCustomID(request,
-            result => {
-                playFabId = result.PlayFabId;
-                Debug.Log("Login successful: " + playFabId);
-            },
-            error => {
-                Debug.LogError("Error during login: " + error.GenerateErrorReport());
-                // Additional debugging information
-                Debug.LogError("Error Details: " + error.ErrorDetails);
-            }
-        );
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
+    }
+
+    private void OnLoginSuccess(LoginResult result)
+    {
+        IsLoggedIn = true;
+        Debug.Log("Login successful!");
+    }
+
+    private void OnLoginFailure(PlayFabError error)
+    {
+        IsLoggedIn = false;
+        Debug.LogError("Login failed: " + error.GenerateErrorReport());
     }
 }

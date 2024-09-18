@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,11 +16,28 @@ public class Inventory : MonoBehaviour
     [Header("Debug")]
     [SerializeField] Button giveItemBtn;
 
+    private PlayFabInventorySync playFabInventorySync;
+
     void Awake()
     {
         Singleton = this;
-        giveItemBtn.onClick.AddListener(delegate { SpawnInventoryItem(); });
+        if (giveItemBtn != null)
+        {
+            giveItemBtn.onClick.AddListener(delegate { SpawnInventoryItem(); });
+        }
+        else
+        {
+            Debug.LogError("giveItemBtn is not assigned.");
+        }
+
+        // Initialize PlayFabInventorySync
+        playFabInventorySync = FindObjectOfType<PlayFabInventorySync>();
+        if (playFabInventorySync == null)
+        {
+            Debug.LogError("PlayFabInventorySync not found in the scene.");
+        }
     }
+
 
     void Update()
     {
@@ -69,13 +84,34 @@ public class Inventory : MonoBehaviour
     {
         Item _item = item;
         if (_item == null)
-        { _item = PickRandomItem(); }
+        {
+            _item = PickRandomItem();
+        }
+
+        if (_item == null)
+        {
+            Debug.LogError("No item found to spawn.");
+            return;
+        }
 
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             if (inventorySlots[i].myItem == null)
             {
-                Instantiate(itemPrefab, inventorySlots[i].transform).Initialize(_item, inventorySlots[i]);
+                InventoryItem inventoryItem = Instantiate(itemPrefab, inventorySlots[i].transform);
+                if (inventoryItem != null)
+                {
+                    inventoryItem.Initialize(_item, inventorySlots[i]);
+                    // Call AddItemToInventory on PlayFabInventorySync
+                    if (playFabInventorySync != null)
+                    {
+                        playFabInventorySync.AddItemToInventory(_item, 1); // Add 1 quantity
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Failed to instantiate itemPrefab.");
+                }
                 break;
             }
         }

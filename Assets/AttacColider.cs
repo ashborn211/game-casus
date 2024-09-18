@@ -22,7 +22,7 @@ public class AttacColider : MonoBehaviour
         }
         else{
             boxCollider.enabled = false;
-            Debug.Log("false");
+                //Debug.Log("false");
         }
     }
 
