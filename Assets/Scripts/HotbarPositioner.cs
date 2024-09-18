@@ -1,23 +1,50 @@
 using UnityEngine;
 
-[RequireComponent(typeof(RectTransform))]
-public class HotbarPositioner : MonoBehaviour
+public class InventoryHotbarManager : MonoBehaviour
 {
-    public Vector2 offset = new Vector2(10f, 10f); // Offset from the bottom-left corner
+    public GameObject inventory; // Reference to the Inventory GameObject (should be a child of the main canvas)
+    public GameObject hotbar; // Reference to the Hotbar GameObject (should be a child of the main canvas)
 
-    private RectTransform rectTransform;
+    // Offsets for positioning the hotbar
+    public Vector2 hotbarPositionWhenInventoryClosed = new Vector2(-85f, -310f); // Position for when the inventory is closed
+    public Vector2 hotbarPositionWhenInventoryOpen = new Vector2(-85f, -80f); // Position for when the inventory is open
+
+    private RectTransform hotbarRectTransform;
 
     void Start()
     {
-        // Get the RectTransform component of the hotbar
-        rectTransform = GetComponent<RectTransform>();
+        hotbarRectTransform = hotbar.GetComponent<RectTransform>();
 
-        // Anchor the hotbar to the bottom-left corner
-        rectTransform.anchorMin = new Vector2(0, 0); // Bottom-left
-        rectTransform.anchorMax = new Vector2(0, 0); // Bottom-left
-        rectTransform.pivot = new Vector2(0, 0);     // Set pivot to the bottom-left corner
+        if (inventory != null && hotbar != null)
+        {
+            // Initialize the hotbar position
+            UpdateHotbarPosition();
+        }
+        else
+        {
+            Debug.LogWarning("Inventory or Hotbar is not assigned in the InventoryHotbarManager script.");
+        }
+    }
 
-        // Position the hotbar with the given offset
-        rectTransform.anchoredPosition = offset;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E)) // Assuming you toggle inventory with 'E'
+        {
+            UpdateHotbarPosition();
+        }
+    }
+
+    void UpdateHotbarPosition()
+    {
+        if (inventory.activeSelf)
+        {
+            // Inventory is open, place hotbar in the desired position
+            hotbarRectTransform.anchoredPosition = hotbarPositionWhenInventoryOpen;
+        }
+        else
+        {
+            // Inventory is closed, place hotbar in the bottom-left corner
+            hotbarRectTransform.anchoredPosition = hotbarPositionWhenInventoryClosed;
+        }
     }
 }

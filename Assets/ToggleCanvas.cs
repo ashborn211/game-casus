@@ -11,23 +11,24 @@ public class ToggleCanvas : MonoBehaviour
     // Key to toggle the Inventory (set to E key)
     private KeyCode toggleKey = KeyCode.E;
 
+    void Start()
+    {
+        if (hotbar != null)
+        {
+            hotbar.SetActive(true);  // Ensure hotbar is visible at the start
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         // Check if the toggle key is pressed
         if (Input.GetKeyDown(toggleKey))
         {
-            // Check if the inventory panel is assigned
+            // Toggle the active state of the Inventory
             if (inventory != null)
             {
-                // Toggle the active state of the Inventory, leaving the Hotbar visible
                 inventory.SetActive(!inventory.activeSelf);
-
-                // Ensure the Hotbar remains visible regardless of inventory state
-                if (hotbar != null)
-                {
-                    hotbar.SetActive(true);  // Always keep the hotbar visible
-                }
             }
             else
             {
