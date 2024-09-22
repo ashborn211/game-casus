@@ -1,37 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public enum SlotTag { None, Head, Chest, Legs, Feet }
-
 public class InventorySlot : MonoBehaviour, IPointerClickHandler
 {
+    public string myTag;
     public InventoryItem myItem { get; set; }
-    public SlotTag myTag;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (Inventory.carriedItem == null) return;
-            if (myTag != SlotTag.None && Inventory.carriedItem.myItem.itemTag != myTag) return;
-            SetItem(Inventory.carriedItem);
+            if (Inventory.Singleton == null)
+            {
+                Debug.LogError("Inventory.Singleton is not initialized.");
+                return;
+            }
+
+            if (Inventory.Singleton.carriedItem == null) // Corrected reference
+            {
+                Debug.LogWarning("No carried item to place in the slot.");
+                return;
+            }
+
+            SetItem(Inventory.Singleton.carriedItem); // Corrected reference
         }
     }
 
     public void SetItem(InventoryItem item)
     {
-        Inventory.carriedItem = null;
+        if (item == null)
+        {
+            Debug.LogError("Trying to set a null item.");
+            return;
+        }
 
-        item.activeSlot.myItem = null;
+        if (myItem != null)
+        {
+            // Destroy existing item
+            Destroy(myItem.gameObject);
+        }
 
         myItem = item;
         myItem.activeSlot = this;
         myItem.transform.SetParent(transform);
         myItem.canvasGroup.blocksRaycasts = true;
 
-        if (myTag != SlotTag.None)
-        { Inventory.Singleton.EquipEquipment(myTag, myItem); }
+        // Assuming EquipEquipment is a valid method
+        Inventory.Singleton.EquipEquipment(myTag, myItem); // Corrected reference
     }
 }

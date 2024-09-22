@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public static Inventory Singleton;
-    public static InventoryItem carriedItem;
+    public static Inventory Singleton { get; private set; }
+    public InventoryItem carriedItem;
 
-    [SerializeField] InventorySlot[] inventorySlots;
-    [SerializeField] InventorySlot[] hotbarSlots;
-    [SerializeField] InventorySlot[] equipmentSlots;
+    [SerializeField] InventorySlot[] inventorySlots = new InventorySlot[15];
+    [SerializeField] InventorySlot[] hotbarSlots = new InventorySlot[5];
+    [SerializeField] InventorySlot equipmentSlot;
     [SerializeField] Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
     [Header("Item List")]
@@ -18,19 +18,34 @@ public class Inventory : MonoBehaviour
 
     private PlayFabInventorySync playFabInventorySync;
 
+    public InventorySlot[] GetInventorySlots() => inventorySlots;
+    public InventoryItem GetItemPrefab() => itemPrefab;
+    public Item[] GetItems() => items;
+
     void Awake()
     {
-        Singleton = this;
+        // Singleton setup
+        if (Singleton == null)
+        {
+            Singleton = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Assign Give Item Button functionality
         if (giveItemBtn != null)
         {
-            giveItemBtn.onClick.AddListener(delegate { SpawnInventoryItem(); });
+            giveItemBtn.onClick.AddListener(SpawnInventoryItem);
         }
         else
         {
             Debug.LogError("giveItemBtn is not assigned.");
         }
 
-        // Initialize PlayFabInventorySync
+        // Setup PlayFab inventory sync
         playFabInventorySync = FindObjectOfType<PlayFabInventorySync>();
         if (playFabInventorySync == null)
         {
@@ -38,55 +53,65 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     void Update()
     {
+        // Update position of carried item to follow the mouse
         if (carriedItem == null) return;
         carriedItem.transform.position = Input.mousePosition;
     }
 
     public void SetCarriedItem(InventoryItem item)
     {
+        // If there's already a carried item, attempt to place it into the active slot
         if (carriedItem != null)
         {
-            if (item.activeSlot.myTag != SlotTag.None && item.activeSlot.myTag != carriedItem.myItem.itemTag) return;
-            item.activeSlot.SetItem(carriedItem);
+            if (item != null && item.activeSlot != null && item.activeSlot.myItem != null)
+            {
+                if (item.activeSlot.myItem.itemTag != carriedItem.myItem.itemTag) return; // Tags don't match
+            }
+
+            item.activeSlot.SetItem(carriedItem); // Place the carried item
         }
 
-        if (item.activeSlot.myTag != SlotTag.None)
-        { EquipEquipment(item.activeSlot.myTag, null); }
+        // Unequip item if moving from an equipment slot
+        if (item != null && item.activeSlot != null)
+        {
+            EquipEquipment(item.activeSlot.myTag, null);
+        }
 
+        // Set the new carried item
         carriedItem = item;
-        carriedItem.canvasGroup.blocksRaycasts = false;
-        item.transform.SetParent(draggablesTransform);
+        if (carriedItem != null)
+        {
+            carriedItem.canvasGroup.blocksRaycasts = false; // Make item draggable
+            carriedItem.transform.SetParent(draggablesTransform); // Attach to draggables transform
+        }
     }
 
-    public void EquipEquipment(SlotTag tag, InventoryItem item = null)
+    public void EquipEquipment(string tag, InventoryItem item = null)
     {
         switch (tag)
         {
-            case SlotTag.Chest:
+            case "Chest":
                 if (item == null)
                 {
-                    // Destroy item.equipmentPrefab on the Player Object;
+                    // Unequip the item
                     Debug.Log("Unequipped item on " + tag);
                 }
                 else
                 {
-                    // Instantiate item.equipmentPrefab on the Player Object;
+                    // Equip the item
                     Debug.Log("Equipped " + item.myItem.name + " on " + tag);
                 }
                 break;
+                // Add more cases for other equipment slots if necessary
         }
     }
 
-    public void SpawnInventoryItem(Item item = null)
+    public void SpawnInventoryItem()
     {
-        Item _item = item;
-        if (_item == null)
-        {
-            _item = PickRandomItem();
-        }
+        // Pick a random item to spawn
+        Item _item = PickRandomItem();
 
         if (_item == null)
         {
@@ -94,15 +119,18 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        // Find an empty slot in the inventory
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             if (inventorySlots[i].myItem == null)
             {
+                // Instantiate the inventory item in the slot
                 InventoryItem inventoryItem = Instantiate(itemPrefab, inventorySlots[i].transform);
                 if (inventoryItem != null)
                 {
                     inventoryItem.Initialize(_item, inventorySlots[i]);
-                    // Call AddItemToInventory on PlayFabInventorySync
+
+                    // Sync with PlayFab
                     if (playFabInventorySync != null)
                     {
                         playFabInventorySync.AddItemToInventory(_item, 1); // Add 1 quantity
@@ -119,6 +147,12 @@ public class Inventory : MonoBehaviour
 
     Item PickRandomItem()
     {
+        if (items.Length == 0)
+        {
+            Debug.LogError("Item list is empty.");
+            return null;
+        }
+
         int random = Random.Range(0, items.Length);
         return items[random];
     }

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Item")]
 public class Item : ScriptableObject
 {
-    public Sprite sprite;
-    public SlotTag itemTag;
-    public GameObject equipmentPrefab;
+    public string name;
+    public string displayName;
+    public string itemTag; // Or use the existing tag
+    public Sprite sprite; // Assuming you have a sprite field
 }
