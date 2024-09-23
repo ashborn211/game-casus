@@ -44,14 +44,12 @@ public class PlayFabInventorySync : MonoBehaviour
             return;
         }
 
-        // Ensure item name, displayName, and tag are properly set
         if (string.IsNullOrEmpty(item.name) || string.IsNullOrEmpty(item.displayName))
         {
-            Debug.LogError("Item data is invalid.");    
+            Debug.LogError("Item data is invalid.");
             return;
         }
 
-        // Populate ItemSaveData properly
         ItemSaveData newItem = new ItemSaveData(item.name, item.displayName, qty, item.itemTag);
         localInventory.AddItem(newItem);
         SaveInventoryToPlayFab();
@@ -67,7 +65,6 @@ public class PlayFabInventorySync : MonoBehaviour
 
         List<ItemSaveData> itemsToSave = localInventory.GetItems();
 
-        // Check for item validity before saving
         foreach (var item in itemsToSave)
         {
             if (string.IsNullOrEmpty(item.name) || string.IsNullOrEmpty(item.displayName))
@@ -78,7 +75,7 @@ public class PlayFabInventorySync : MonoBehaviour
 
         string json = JsonUtility.ToJson(new ItemListWrapper { items = itemsToSave });
 
-        Debug.Log("Saving Inventory JSON: " + json); // Log JSON data
+        Debug.Log("Saving Inventory JSON: " + json);
 
         PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
         {
@@ -106,7 +103,7 @@ public class PlayFabInventorySync : MonoBehaviour
                 }
 
                 string json = result.Data["inventory"].Value;
-                Debug.Log("Loaded Inventory JSON: " + json); // Log JSON data
+                Debug.Log("Loaded Inventory JSON: " + json);
 
                 if (string.IsNullOrEmpty(json))
                 {
@@ -123,10 +120,6 @@ public class PlayFabInventorySync : MonoBehaviour
 
                 ClearAllSlots();
 
-                int inventoryIndex = 0;
-                int hotbarIndex = 0;
-                int equipmentIndex = 0;
-
                 foreach (ItemSaveData saveData in wrapper.items)
                 {
                     Item item = FindItemByName(saveData.name);
@@ -135,20 +128,17 @@ public class PlayFabInventorySync : MonoBehaviour
                         InventoryItem inventoryItem = Instantiate(itemPrefab);
                         inventoryItem.Initialize(item, null);
 
-                        if (inventoryIndex < inventorySlots.Length)
+                        if (inventorySlots.Length > 0)
                         {
-                            inventorySlots[inventoryIndex].SetItem(inventoryItem);
-                            inventoryIndex++;
+                            inventorySlots[0].SetItem(inventoryItem);
                         }
-                        else if (hotbarIndex < hotbarSlots.Length)
+                        else if (hotbarSlots.Length > 0)
                         {
-                            hotbarSlots[hotbarIndex].SetItem(inventoryItem);
-                            hotbarIndex++;
+                            hotbarSlots[0].SetItem(inventoryItem);
                         }
-                        else if (equipmentIndex < equipmentSlots.Length)
+                        else if (equipmentSlots.Length > 0)
                         {
-                            equipmentSlots[equipmentIndex].SetItem(inventoryItem);
-                            equipmentIndex++;
+                            equipmentSlots[0].SetItem(inventoryItem);
                         }
                         else
                         {
@@ -193,16 +183,33 @@ public class PlayFabInventorySync : MonoBehaviour
             }
         }
     }
-
     private Item FindItemByName(string itemName)
     {
-        foreach (var item in Inventory.Singleton.GetItems())
+        // Assuming you have a method to get an Item based on its name.
+        foreach (var item in localInventory.GetItems())
         {
             if (item.name == itemName)
             {
-                return item;
+                // Return the corresponding Item based on your ItemSaveData structure
+                // If you have a way to get an Item from ItemSaveData, implement that here
+                return ConvertToItem(item); // Update this method accordingly
             }
         }
         return null;
     }
+
+    // Convert ItemSaveData to Item
+    private Item ConvertToItem(ItemSaveData itemSaveData)
+    {
+        // Assuming you have a method to create or retrieve an Item instance based on ItemSaveData
+        // Replace this logic with your actual implementation
+        Item item = new Item
+        {
+            name = itemSaveData.name,
+            displayName = itemSaveData.displayName,
+            // Assign other properties as necessary
+        };
+        return item;
+    }
+
 }

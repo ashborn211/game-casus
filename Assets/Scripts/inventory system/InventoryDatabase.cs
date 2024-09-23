@@ -11,6 +11,11 @@ public class InventoryDatabase : ScriptableObject
         items.Add(item);
     }
 
+    public void RemoveItem(ItemSaveData item)
+    {
+        items.Remove(item);
+    }
+
     public void SetItems(List<ItemSaveData> newItems)
     {
         items = newItems;

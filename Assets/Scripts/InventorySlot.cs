@@ -1,28 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IPointerClickHandler
 {
-    public string myTag;
     public InventoryItem myItem { get; set; }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (Inventory.Singleton == null)
-            {
-                Debug.LogError("Inventory.Singleton is not initialized.");
-                return;
-            }
-
-            if (Inventory.Singleton.carriedItem == null) // Corrected reference
-            {
-                Debug.LogWarning("No carried item to place in the slot.");
-                return;
-            }
-
-            SetItem(Inventory.Singleton.carriedItem); // Corrected reference
+            if (Inventory.carriedItem == null) return;
+            SetItem(Inventory.carriedItem);
         }
     }
 
@@ -36,7 +26,6 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
 
         if (myItem != null)
         {
-            // Destroy existing item
             Destroy(myItem.gameObject);
         }
 
@@ -44,8 +33,5 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         myItem.activeSlot = this;
         myItem.transform.SetParent(transform);
         myItem.canvasGroup.blocksRaycasts = true;
-
-        // Assuming EquipEquipment is a valid method
-        Inventory.Singleton.EquipEquipment(myTag, myItem); // Corrected reference
     }
 }

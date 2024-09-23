@@ -7250,7 +7250,6 @@ GameObject:
   m_Component:
   - component: {fileID: 304997639}
   - component: {fileID: 304997640}
-  - component: {fileID: 304997641}
   m_Layer: 5
   m_Name: Hotbar Slots
   m_TagString: Untagged
@@ -7306,18 +7305,6 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 2
   m_ConstraintCount: 1
---- !u!114 &304997641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 304997638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bcc1a345cf789e4490359976c0ca826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &309505983
 GameObject:
   m_ObjectHideFlags: 0
@@ -12895,6 +12882,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localInventory: {fileID: 11400000, guid: 761009dcb3c9823469133c6d072e0033, type: 2}
+  itemPrefab: {fileID: 0}
+  inventorySlots: []
+  hotbarSlots: []
+  equipmentSlots: []
 --- !u!1 &526461465
 GameObject:
   m_ObjectHideFlags: 0
@@ -40833,6 +40824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51ec66caf77ae0488557cbc6e41c4f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carriedItem: {fileID: 0}
   inventorySlots:
   - {fileID: 266070733}
   - {fileID: 1247084140}
@@ -40855,7 +40847,7 @@ MonoBehaviour:
   - {fileID: 1546421771}
   - {fileID: 1089850492}
   - {fileID: 1279734725}
-  equipmentSlots: []
+  equipmentSlot: {fileID: 0}
   draggablesTransform: {fileID: 1325599969}
   itemPrefab: {fileID: 8527893814601168996, guid: 1028cb616073445408e5c9f2550546dc,
     type: 3}
