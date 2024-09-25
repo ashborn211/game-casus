@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   itemID: 714f0954-a60b-41a4-a412-e3fbeef6c8d8
-  itemName: Axr
+  itemName: Axe
   description: This is a normal axe
   maxStackSize: 2
   icon: {fileID: 21300000, guid: 719c2201c2f5f6c4aafffaeb5abdf5f9, type: 3}

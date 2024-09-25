@@ -1,12 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InventorySystem
+public class InventorySystem : MonoBehaviour
 {
-
     public event UnityAction OnInventoryChanged;
     public event UnityAction<ItemData, int> OnInventoryFull;
 
@@ -18,20 +15,12 @@ public class InventorySystem
 
     public List<InventorySlot> InventorySlots => slots;
 
-    [ContextMenu(itemName: "Adjust Size")]
-
     private void Start()
     {
-        if (slots == null)
-        {
-            AdjustSize();
-        }
-
-        AdjustSize();
+        AdjustSize(); // Ensure slots are properly initialized
     }
 
-
-
+    [ContextMenu(itemName: "Adjust Size")]
     private void AdjustSize()
     {
         if (slots == null) slots = new List<InventorySlot>();
@@ -45,12 +34,9 @@ public class InventorySystem
         // Add new slots if the list is smaller than the desired size
         while (slots.Count < size)
         {
-            // Ensure every slot is initialized as a new InventorySlot
-            InventorySlot newSlot = new InventorySlot();
-            slots.Add(newSlot);
+            slots.Add(new InventorySlot()); // Add empty InventorySlots
         }
     }
-
 
     private InventorySlot FindSlot(ItemData itemData)
     {
@@ -66,8 +52,7 @@ public class InventorySystem
 
     private bool HasFreeSlot(out InventorySlot freeSlot)
     {
-        freeSlot = slots.FirstOrDefault(slot => slot.IsEmptySlot());
-
+        freeSlot = slots.Find(slot => slot.IsEmptySlot());
         return freeSlot != null;
     }
 
@@ -87,48 +72,31 @@ public class InventorySystem
             if (slotContainsItem != null)
             {
                 int remainingSpace = slotContainsItem.GetRemainingSpace();
-                int amountToAdd = Mathf.Min(a: remainingSpace, b: amount);
+                int amountToAdd = Mathf.Min(remainingSpace, amount);
                 slotContainsItem.AddToStack(amountToAdd);
                 amount -= amountToAdd;
             }
             else if (HasFreeSlot(out InventorySlot freeSlot))
             {
-                int amountToAdd = Mathf.Min(a: itemData.GetMaxStackSize(), b: amount);
+                int amountToAdd = Mathf.Min(itemData.GetMaxStackSize(), amount);
                 freeSlot.UpdateInventorySlot(itemData, amountToAdd);
                 amount -= amountToAdd;
             }
-            else 
+            else
             {
-                HandleInventoryFull(itemData, amountAdded: tempAmount - amount, amountRemaining: amount);
+                HandleInventoryFull(itemData, tempAmount - amount, amount);
                 return false;
             }
         }
+
         OnInventoryChanged?.Invoke();
         return true;
     }
-    
+
     private void HandleInventoryFull(ItemData itemData, int amountAdded, int amountRemaining)
     {
-        Debug.Log(message:$"Added {amountAdded} {itemData.GetItemName()}");
-
+        Debug.Log($"Added {amountAdded} {itemData.GetItemName()}");
         OnInventoryFull?.Invoke(itemData, amountRemaining);
         OnInventoryChanged?.Invoke();
     }
-
-
-    public void AddToSpecificSlot(InventorySlot slot, int amount)
-    {
-        slot.AddToStack(amount);
-    }
-
-
-
-
-
-
-
-
-
-
-
 }

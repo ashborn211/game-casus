@@ -1,20 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
-
 public class InventorySlot
 {
-    [SerializeField] private ItemData itemData;
+    public ItemData itemData; // Store item reference
+    public int stackSize;     // Track the current stack size
 
     public ItemData ItemData => itemData;
-
-    [SerializeField] private int stackSize;
-
     public int StackSize => stackSize;
-
 
     public InventorySlot(ItemData itemData, int stackSize)
     {
@@ -41,7 +34,7 @@ public class InventorySlot
 
     public bool CanAddStackSize()
     {
-        return stackSize < itemData.GetMaxStackSize();
+        return itemData != null && stackSize < itemData.GetMaxStackSize();
     }
 
     public int GetRemainingSpace()
@@ -63,26 +56,8 @@ public class InventorySlot
         }
     }
 
-    public bool SplitStack(out int splitStack)
-    {
-        if (stackSize <= 1)
-        {
-            splitStack = 0;
-            return false;    
-        }
-
-        splitStack = Mathf.RoundToInt(f: (float)stackSize / 2);
-        return true;
-    }
-
     public bool IsEmptySlot()
     {
         return itemData == null;
     }
-
-
-
-
-
-
 }
