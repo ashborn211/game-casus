@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class Attack : MonoBehaviour
     // Start is called before the first frame update
     private Transform mc;
     public bool inAttack = false;
+    private float targetAngel = 0.0f;
+    private float currentAngel = 0.0f;
+    private bool clockwise = true;
     void Start()
     {
         mc = GetComponent<Transform>();
@@ -18,8 +22,16 @@ public class Attack : MonoBehaviour
     {
         if(!inAttack){
             Vector3 mousePos = Input.mousePosition;
+            targetAngel = Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135;
+            if(targetAngel > 360.0f){
+                targetAngel-=360.0f;
+            }
+            currentAngel = mc.eulerAngles.y; 
+
             // Debug.Log(mousePos.x + " x " + mousePos.y + " y of the " + Screen.width + " x " + Screen.height + " y");
             // Debug.Log(Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y));
+            
+            clockwise = clockwiseFastestWay(targetAngel, currentAngel);
             mc.localRotation = Quaternion.Euler(0,Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135,0);
             
         }
@@ -68,4 +80,26 @@ public class Attack : MonoBehaviour
         //Debug.Log("r " + result + " a " + adjacent + " o " + opposite + " ratio " + (adjacent/opposite) + " case " + i);
         return result;
     }
+
+    bool clockwiseFastestWay(float target, float current){
+        float clockWay = target-current;
+        float counterClockway = current-target;
+
+        if(clockWay<0.0f){
+            clockWay+=360.0f;
+        }
+
+        if(counterClockway<0.0f){
+            counterClockway+=360.0f;
+        }
+
+        if(clockWay<counterClockway){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    
 }
