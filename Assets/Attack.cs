@@ -6,6 +6,7 @@ public class Attack : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform mc;
+    public bool inAttack = false;
     void Start()
     {
         mc = GetComponent<Transform>();
@@ -15,16 +16,16 @@ public class Attack : MonoBehaviour
     
     void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
+        if(!inAttack){
+            Vector3 mousePos = Input.mousePosition;
+            // Debug.Log(mousePos.x + " x " + mousePos.y + " y of the " + Screen.width + " x " + Screen.height + " y");
+            // Debug.Log(Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y));
+            mc.localRotation = Quaternion.Euler(0,Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135,0);
             
-        // Debug.Log(mousePos.x + " x " + mousePos.y + " y of the " + Screen.width + " x " + Screen.height + " y");
-        // Debug.Log(Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y));
-        mc.localRotation = Quaternion.Euler(0,Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135,0);
-
-    
+        }
     }
 
-        float Angle(float x1, float y1, float x2, float y2)
+    float Angle(float x1, float y1, float x2, float y2)
     {
         float adjacent;
         float opposite;

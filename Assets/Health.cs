@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
     void Update()
     {
         if(health <=0 && !death){
-            Debug.Log(objectGame.name + " death");
+            Debug.Log(objectGame.name + " death ---------------------------------------------------------------------");
             death = true;
             Destroy(parent);
             Destroy(gameObject);

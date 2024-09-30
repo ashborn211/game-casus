@@ -9,6 +9,7 @@ public class AttackColiderSpear : MonoBehaviour
     private int attackDamge = 5;
     private MeshCollider boxCollider;
     private Transform transformer;
+
     
     // Start is called before the first frame update
     void Start()

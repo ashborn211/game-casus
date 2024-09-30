@@ -33317,6 +33317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2dd4f23c6bb86548b7cf62a41551f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordColider0: {fileID: -5495902117074765545, guid: a39cdbb34eea1f04eb8b95859a870211,
+    type: 3}
+  spearColider0: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &1377463762
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33338,7 +33341,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: a39cdbb34eea1f04eb8b95859a870211, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!1 &1384013880
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class movementPlayer : MonoBehaviour
+public class MovementPlayer : MonoBehaviour
 {
     private Rigidbody rb;
     private float inputDirX;
     private float inputDirZ;
-    public float moveSpeed = 7;
+    private float moveSpeed = 7;
     public float camAngel = 45;
     private float lastDirection;
     private Vector3 velocity;
+
+    public bool inAttack = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,11 @@ public class movementPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.position.y <= 2.8)
+        if(inAttack)
+        {
+            moveSpeed = 0;
+        }
+        else if(rb.position.y <= 2.8)
         {
             moveSpeed = 5;
         }
@@ -29,6 +35,8 @@ public class movementPlayer : MonoBehaviour
         {
             moveSpeed = 7;
         }
+
+        
 
         inputDirX = Input.GetAxisRaw("Horizontal");
         inputDirZ = Input.GetAxisRaw("Vertical");
