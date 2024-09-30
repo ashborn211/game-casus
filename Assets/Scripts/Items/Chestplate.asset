@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Chestplate
   m_EditorClassIdentifier: 
   sprite: {fileID: -2026375829, guid: 383aef37898fa624db3efdbee6c0df52, type: 3}
-  itemTag: 2
+  itemTag: 1
+  equipmentPrefab: {fileID: 0}

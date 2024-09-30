@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   sprite: {fileID: -1345518822, guid: 383aef37898fa624db3efdbee6c0df52, type: 3}
+  itemTag: 2
+  equipmentPrefab: {fileID: 0}
