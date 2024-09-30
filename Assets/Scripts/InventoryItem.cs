@@ -23,7 +23,7 @@ public void Initialize(Item item, InventorySlot parent)
 {
     if (item == null)
     {
-        Debug.LogError("Attempted to initialize InventoryItem with a null Item.");
+        Debug.Log("Attempted to initialize InventoryItem with a null Item.");
         return;
     }
 
@@ -33,7 +33,7 @@ public void Initialize(Item item, InventorySlot parent)
     // Check if the item is a .asset file
     if (!assetPath.EndsWith(".asset"))
     {
-        Debug.LogError("Attempted to initialize with a non-asset Item: " + item.name);
+        Debug.Log("Attempted to initialize with a non-asset Item: " + item.name);
         return; // Prevent initializing with a non-asset Item
     }
 

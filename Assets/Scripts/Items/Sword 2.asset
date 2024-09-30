@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f01cccb2c080ea45b4d365239347695, type: 3}
   m_Name: Sword 2
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: -973323764, guid: 383aef37898fa624db3efdbee6c0df52, type: 3}
   itemTag: 0
-  equipmentPrefab: {fileID: 4402478757356583417, guid: 1028cb616073445408e5c9f2550546dc,
-    type: 3}
+  equipmentPrefab: {fileID: 0}
+  isValidItem: 1

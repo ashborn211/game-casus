@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
     {
         if (inventorySlots == null || inventorySlots.Length == 0)
         {
-            Debug.LogError("Inventory slots are not assigned or empty!");
+            Debug.Log("Inventory slots are not assigned or empty!");
             return;
         }
 
@@ -210,7 +210,7 @@ public void SpawnInventoryItem(Item item = null)
     // Check if the item is a .asset file
     if (!assetPath.EndsWith(".asset"))
     {
-        Debug.LogError("Attempted to spawn a non-asset Item: " + _item.name);
+        Debug.Log("Attempted to spawn a non-asset Item: " + _item.name);
         return; // Prevent spawning a non-asset Item
     }
 
