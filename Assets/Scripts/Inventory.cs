@@ -196,32 +196,38 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void SpawnInventoryItem(Item item = null)
+public void SpawnInventoryItem(Item item = null)
+{
+    Item _item = item;
+    if (_item == null)
     {
-        Item _item = item;
-        if (_item == null)
+        _item = PickRandomItem();
+    }
+
+    // Get the asset path of the item
+    string assetPath = AssetDatabase.GetAssetPath(_item);
+
+    // Check if the item is a .asset file
+    if (!assetPath.EndsWith(".asset"))
+    {
+        Debug.LogError("Attempted to spawn a non-asset Item: " + _item.name);
+        return; // Prevent spawning a non-asset Item
+    }
+
+    for (int i = 0; i < inventorySlots.Length; i++)
+    {
+        // Check if the slot is empty
+        if (inventorySlots[i].myItem == null)
         {
-            _item = PickRandomItem();
-        }
-
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            // Check if the slot is empty
-            if (inventorySlots[i].myItem == null)
-            {
-                InventoryItem newItem = Instantiate(itemPrefab, inventorySlots[i].transform);
-                newItem.Initialize(_item, inventorySlots[i]);
-
-#if UNITY_EDITOR
-                // Log asset path in the editor
-                string assetPath = AssetDatabase.GetAssetPath(_item);
-                Debug.Log("Item spawned: " + _item.name + ", Asset Path: " + assetPath);
-#endif
-
-                break;
-            }
+            InventoryItem newItem = Instantiate(itemPrefab, inventorySlots[i].transform);
+            newItem.Initialize(_item, inventorySlots[i]);
+            Debug.Log($"Spawned InventoryItem: {_item.name} from path: {assetPath}");
+            break;
         }
     }
+}
+
+
 
 
     Item PickRandomItem()

@@ -10,4 +10,7 @@ public class Item : ScriptableObject
 
     [Header("If the item can be equipped")]
     public GameObject equipmentPrefab;
+
+    [Header("Validity Check")]
+    public bool isValidItem = true; // Add this field
 }
