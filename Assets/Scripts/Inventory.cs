@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO; // For file handling
 using System.Text; // For encoding
-using Newtonsoft.Json; // For JSON serialization
+using Newtonsoft.Json;
+using UnityEditor; // For JSON serialization
 
 public class Inventory : MonoBehaviour
 {
@@ -199,22 +200,35 @@ public class Inventory : MonoBehaviour
     {
         Item _item = item;
         if (_item == null)
-        { _item = PickRandomItem(); }
+        {
+            _item = PickRandomItem();
+        }
 
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             // Check if the slot is empty
             if (inventorySlots[i].myItem == null)
             {
-                Instantiate(itemPrefab, inventorySlots[i].transform).Initialize(_item, inventorySlots[i]);
+                InventoryItem newItem = Instantiate(itemPrefab, inventorySlots[i].transform);
+                newItem.Initialize(_item, inventorySlots[i]);
+
+#if UNITY_EDITOR
+                // Log asset path in the editor
+                string assetPath = AssetDatabase.GetAssetPath(_item);
+                Debug.Log("Item spawned: " + _item.name + ", Asset Path: " + assetPath);
+#endif
+
                 break;
             }
         }
     }
 
+
     Item PickRandomItem()
     {
         int random = Random.Range(0, items.Length);
+        Debug.Log("Picked item: " + items[random]?.name ?? "Null item");
+
         return items[random];
     }
 }
