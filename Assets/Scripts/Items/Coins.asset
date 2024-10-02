@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Coins
   m_EditorClassIdentifier: 
   sprite: {fileID: 1120320754, guid: 383aef37898fa624db3efdbee6c0df52, type: 3}
-  itemTag: 3
+  itemTag: 0
   equipmentPrefab: {fileID: 0}
+  isValidItem: 1
