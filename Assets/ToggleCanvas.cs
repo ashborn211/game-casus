@@ -49,13 +49,13 @@ public class ToggleCanvas : MonoBehaviour
         {
             if (inventoryVisible)
             {
-                // Position the hotbar at the middle bottom of the inventory
-                hotbarRectTransform.anchoredPosition = new Vector2(0, -140); // Adjust Y value as needed
+                // Position the hotbar inside the inventory
+                hotbarRectTransform.anchoredPosition = new Vector2(0, -85); // Adjust Y value as needed
             }
             else
             {
-                // Position the hotbar at the bottom right corner of the canvas
-                hotbarRectTransform.anchoredPosition = new Vector2(-500, -250); // Adjust X and Y values as needed
+                // Position the hotbar in the bottom right corner
+                hotbarRectTransform.anchoredPosition = new Vector2(-500, -200); // Adjust X and Y values as needed
             }
         }
     }
