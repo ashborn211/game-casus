@@ -14,9 +14,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] InventorySlot[] inventorySlots;
     [SerializeField] InventorySlot[] hotbarSlots;
-
     [SerializeField] InventorySlot[] equipmentSlots;
-
     [SerializeField] Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
 
@@ -27,14 +25,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] Button giveItemBtn;
 
     private string saveFilePath;
-
+    public GameObject chestInventoryUI; // Chest inventory UI object
+    public GameObject playerInventoryUI; // Player inventory UI object
 
     void Awake()
     {
         Singleton = this;
         giveItemBtn.onClick.AddListener(delegate { SpawnInventoryItem(); });
         saveFilePath = Path.Combine(Application.persistentDataPath, "inventoryData.json");
-
     }
 
     void Update()
@@ -43,18 +41,19 @@ public class Inventory : MonoBehaviour
 
         carriedItem.transform.position = Input.mousePosition;
 
-        // // Press 'S' to manually save the inventory
-        // if (Input.GetKeyDown(KeyCode.S))
-        // {
-        //     SaveInventory();
-        // }
+        // Press 'S' to manually save the inventory
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SaveInventory();
+        }
 
-        // // Press 'L' to manually load the inventory
-        // if (Input.GetKeyDown(KeyCode.L))
-        // {
-        //     LoadInventory();
-        // }
+        // Press 'L' to manually load the inventory
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadInventory();
+        }
     }
+
     // Function to check inventory slot assignment
     [ContextMenu("Check Inventory Slot Assignment")]
     public void CheckInventorySlotAssignment()
@@ -77,6 +76,7 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
     public void SaveInventory()
     {
         InventoryData data = new InventoryData();
@@ -116,8 +116,6 @@ public class Inventory : MonoBehaviour
 
         Debug.Log("Inventory saved: " + jsonData);
     }
-
-
 
     public void LoadInventory()
     {
@@ -159,7 +157,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     public void SetCarriedItem(InventoryItem item)
     {
         if (carriedItem != null)
@@ -169,7 +166,9 @@ public class Inventory : MonoBehaviour
         }
 
         if (item.activeSlot.myTag != SlotTag.None)
-        { EquipEquipment(item.activeSlot.myTag, null); }
+        {
+            EquipEquipment(item.activeSlot.myTag, null);
+        }
 
         carriedItem = item;
         carriedItem.canvasGroup.blocksRaycasts = false;
@@ -192,43 +191,39 @@ public class Inventory : MonoBehaviour
                     Debug.Log("Equipped " + item.myItem.name + " on " + tag);
                 }
                 break;
-
         }
     }
 
-public void SpawnInventoryItem(Item item = null)
-{
-    Item _item = item;
-    if (_item == null)
+    public void SpawnInventoryItem(Item item = null)
     {
-        _item = PickRandomItem();
-    }
-
-    // Get the asset path of the item
-    string assetPath = AssetDatabase.GetAssetPath(_item);
-
-    // Check if the item is a .asset file
-    if (!assetPath.EndsWith(".asset"))
-    {
-        Debug.Log("Attempted to spawn a non-asset Item: " + _item.name);
-        return; // Prevent spawning a non-asset Item
-    }
-
-    for (int i = 0; i < inventorySlots.Length; i++)
-    {
-        // Check if the slot is empty
-        if (inventorySlots[i].myItem == null)
+        Item _item = item;
+        if (_item == null)
         {
-            InventoryItem newItem = Instantiate(itemPrefab, inventorySlots[i].transform);
-            newItem.Initialize(_item, inventorySlots[i]);
-            Debug.Log($"Spawned InventoryItem: {_item.name} from path: {assetPath}");
-            break;
+            _item = PickRandomItem();
+        }
+
+        // Get the asset path of the item
+        string assetPath = AssetDatabase.GetAssetPath(_item);
+
+        // Check if the item is a .asset file
+        if (!assetPath.EndsWith(".asset"))
+        {
+            Debug.Log("Attempted to spawn a non-asset Item: " + _item.name);
+            return; // Prevent spawning a non-asset Item
+        }
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            // Check if the slot is empty
+            if (inventorySlots[i].myItem == null)
+            {
+                InventoryItem newItem = Instantiate(itemPrefab, inventorySlots[i].transform);
+                newItem.Initialize(_item, inventorySlots[i]);
+                Debug.Log($"Spawned InventoryItem: {_item.name} from path: {assetPath}");
+                break;
+            }
         }
     }
-}
-
-
-
 
     Item PickRandomItem()
     {
@@ -237,4 +232,9 @@ public void SpawnInventoryItem(Item item = null)
 
         return items[random];
     }
+    public InventorySlot[] GetInventorySlots()
+    {
+        return inventorySlots;
+    }
+
 }

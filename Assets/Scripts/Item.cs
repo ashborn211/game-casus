@@ -7,6 +7,7 @@ public class Item : ScriptableObject
 {
     public Sprite sprite;
     public SlotTag itemTag;
+    public Sprite icon; // Icon used for the UI display
 
     [Header("If the item can be equipped")]
     public GameObject equipmentPrefab;
