@@ -9,7 +9,7 @@ public class movementPlayer : MonoBehaviour
     private float inputDirZ;
     public float moveSpeed = 7;
     public float camAngel = 45;
-    private float lastDirection;
+    public float lastDirection = 0f;
     private Vector3 velocity;
 
     // Start is called before the first frame update
@@ -39,7 +39,7 @@ public class movementPlayer : MonoBehaviour
             }
             else{
                 velocity = Velocity(moveSpeed, Direction(inputDirX, inputDirZ*-1) - camAngel - 90);
-                lastDirection = Direction(inputDirX*-1, inputDirZ);
+                lastDirection = Direction(inputDirX, inputDirZ*-1) - camAngel - 90;
             }
         }
         else{
