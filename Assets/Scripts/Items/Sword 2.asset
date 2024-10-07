@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: -973323764, guid: 383aef37898fa624db3efdbee6c0df52, type: 3}
   itemTag: 0
+  itemType: 0
   equipmentPrefab: {fileID: 0}
   isValidItem: 1
   damage: 30
+  amount: 0

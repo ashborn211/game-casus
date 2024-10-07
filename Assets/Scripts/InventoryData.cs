@@ -9,12 +9,14 @@ public class InventoryData
 [System.Serializable]
 public class ItemData
 {
-    public string itemName; // Name of the Scriptable Object
-    public SlotTag itemTag; // Tag for the item slot
+    public string itemName;
+    public Item.ItemType itemType; // Change this line
 
-    public ItemData(string name, SlotTag tag)
+    public ItemData(string itemName, Item.ItemType itemType)
     {
-        itemName = name;
-        itemTag = tag;
+        this.itemName = itemName;
+        this.itemType = itemType;
     }
 }
+
+

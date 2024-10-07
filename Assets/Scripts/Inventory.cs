@@ -5,7 +5,12 @@ using UnityEngine.UI;
 using System.IO; // For file handling
 using System.Text; // For encoding
 using Newtonsoft.Json;
-using UnityEditor; // For JSON serialization
+using UnityEditor;
+using static Item; // For JSON serialization
+
+
+
+[System.Serializable]
 
 public class Inventory : MonoBehaviour
 {
@@ -14,7 +19,6 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] InventorySlot[] inventorySlots;
     [SerializeField] InventorySlot[] hotbarSlots;
-
     [SerializeField] InventorySlot[] equipmentSlots;
 
     [SerializeField] Transform draggablesTransform;
@@ -28,34 +32,46 @@ public class Inventory : MonoBehaviour
 
     private string saveFilePath;
 
-
     void Awake()
     {
         Singleton = this;
         giveItemBtn.onClick.AddListener(delegate { SpawnInventoryItem(); });
         saveFilePath = Path.Combine(Application.persistentDataPath, "inventoryData.json");
-
     }
 
     void Update()
     {
         if (carriedItem == null) return;
-
         carriedItem.transform.position = Input.mousePosition;
-
-        // // Press 'S' to manually save the inventory
-        // if (Input.GetKeyDown(KeyCode.S))
-        // {
-        //     SaveInventory();
-        // }
-
-        // // Press 'L' to manually load the inventory
-        // if (Input.GetKeyDown(KeyCode.L))
-        // {
-        //     LoadInventory();
-        // }
+        HandleHotbarSelection();
     }
-    // Function to check inventory slot assignment
+
+    private void HandleHotbarSelection()
+    {
+        for (int i = 0; i < hotbarSlots.Length; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                UseHotbarItem(i);
+                break;
+            }
+        }
+    }
+
+    private void UseHotbarItem(int index)
+    {
+        if (index < 0 || index >= hotbarSlots.Length) return;
+
+        if (hotbarSlots[index]?.myItem != null)
+        {
+            Debug.Log($"Using item: {hotbarSlots[index].myItem.myItem.name}");
+        }
+        else
+        {
+            Debug.Log("No item in this hotbar slot.");
+        }
+    }
+
     [ContextMenu("Check Inventory Slot Assignment")]
     public void CheckInventorySlotAssignment()
     {
@@ -77,47 +93,27 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
     public void SaveInventory()
     {
         InventoryData data = new InventoryData();
 
-        // Ensure inventorySlots is not null and has elements
-        if (inventorySlots == null || inventorySlots.Length == 0)
-        {
-            Debug.LogWarning("Inventory slots are not assigned or empty.");
-            return;
-        }
-
-        // Save inventory slots
         foreach (var slot in inventorySlots)
         {
-            // Skip if slot is null
-            if (slot == null)
-            {
-                Debug.LogWarning("Null slot found in inventorySlots array, skipping.");
-                continue;
-            }
-
-            // Skip if no item is in the slot
             if (slot.myItem == null || slot.myItem.myItem == null)
             {
                 Debug.Log("Empty slot found, skipping.");
                 continue;
             }
 
-            // Save the item data
-            ItemData itemData = new ItemData(slot.myItem.myItem.name, slot.myItem.myItem.itemTag);
+            ItemData itemData = new ItemData(slot.myItem.myItem.name, slot.myItem.myItem.itemType);
             data.items.Add(itemData);
         }
 
-        // Convert data to JSON and save it to a file
         string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
         File.WriteAllText(saveFilePath, jsonData);
-
         Debug.Log("Inventory saved: " + jsonData);
     }
-
-
 
     public void LoadInventory()
     {
@@ -127,14 +123,11 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        // Read the JSON data from the file
         string jsonData = File.ReadAllText(saveFilePath, Encoding.UTF8);
         InventoryData data = JsonConvert.DeserializeObject<InventoryData>(jsonData);
 
-        // Clear existing inventory before loading
         ClearInventory();
 
-        // Load the inventory from the saved data
         foreach (var itemData in data.items)
         {
             Item itemToLoad = System.Array.Find(items, i => i.name == itemData.itemName);
@@ -159,82 +152,76 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     public void SetCarriedItem(InventoryItem item)
     {
         if (carriedItem != null)
         {
-            if (item.activeSlot.myTag != SlotTag.None && item.activeSlot.myTag != carriedItem.myItem.itemTag) return;
+            if (item.activeSlot.armorType != ArmorType.None &&
+                item.activeSlot.armorType != (ArmorType)carriedItem.myItem.armorType)
+                return;
+
             item.activeSlot.SetItem(carriedItem);
         }
 
-        if (item.activeSlot.myTag != SlotTag.None)
-        { EquipEquipment(item.activeSlot.myTag, null); }
+        if (item.activeSlot.armorType != ArmorType.None)
+        {
+            EquipEquipment(item.activeSlot.armorType, null);
+        }
 
         carriedItem = item;
         carriedItem.canvasGroup.blocksRaycasts = false;
         item.transform.SetParent(draggablesTransform);
     }
 
-    public void EquipEquipment(SlotTag tag, InventoryItem item = null)
+    public void EquipEquipment(ArmorType armorType, InventoryItem item = null)
     {
-        switch (tag)
+        switch (armorType)
         {
-            case SlotTag.Chestplate:
-                if (item == null)
-                {
-                    // Destroy item.equipmentPrefab on the Player Object;
-                    Debug.Log("Unequipped Chest on " + tag);
-                }
-                else
-                {
-                    // Instantiate item.equipmentPrefab on the Player Object;
-                    Debug.Log("Equipped " + item.myItem.name + " on " + tag);
-                }
+            case ArmorType.Helmet:
+                Debug.Log(item == null ? "Unequipped Helmet." : "Equipped Helmet: " + item.myItem.name);
                 break;
-
+            case ArmorType.Chestplate:
+                Debug.Log(item == null ? "Unequipped Chestplate." : "Equipped Chestplate: " + item.myItem.name);
+                break;
+            case ArmorType.Leggings:
+                Debug.Log(item == null ? "Unequipped Leggings." : "Equipped Leggings: " + item.myItem.name);
+                break;
+            case ArmorType.Boots:
+                Debug.Log(item == null ? "Unequipped Boots." : "Equipped Boots: " + item.myItem.name);
+                break;
+            default:
+                Debug.Log("Invalid armor type.");
+                break;
         }
     }
 
-public void SpawnInventoryItem(Item item = null)
-{
-    Item _item = item;
-    if (_item == null)
+    public void SpawnInventoryItem(Item item = null)
     {
-        _item = PickRandomItem();
-    }
+        Item _item = item ?? PickRandomItem();
+        string assetPath = AssetDatabase.GetAssetPath(_item);
 
-    // Get the asset path of the item
-    string assetPath = AssetDatabase.GetAssetPath(_item);
-
-    // Check if the item is a .asset file
-    if (!assetPath.EndsWith(".asset"))
-    {
-        Debug.Log("Attempted to spawn a non-asset Item: " + _item.name);
-        return; // Prevent spawning a non-asset Item
-    }
-
-    for (int i = 0; i < inventorySlots.Length; i++)
-    {
-        // Check if the slot is empty
-        if (inventorySlots[i].myItem == null)
+        if (!assetPath.EndsWith(".asset"))
         {
-            InventoryItem newItem = Instantiate(itemPrefab, inventorySlots[i].transform);
-            newItem.Initialize(_item, inventorySlots[i]);
-            Debug.Log($"Spawned InventoryItem: {_item.name} from path: {assetPath}");
-            break;
+            Debug.Log("Attempted to spawn a non-asset Item: " + _item.name);
+            return;
+        }
+
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            if (inventorySlots[i].myItem == null)
+            {
+                InventoryItem newItem = Instantiate(itemPrefab, inventorySlots[i].transform);
+                newItem.Initialize(_item, inventorySlots[i]);
+                Debug.Log($"Spawned InventoryItem: {_item.name} from path: {assetPath}");
+                break;
+            }
         }
     }
-}
-
-
-
 
     Item PickRandomItem()
     {
         int random = Random.Range(0, items.Length);
         Debug.Log("Picked item: " + items[random]?.name ?? "Null item");
-
         return items[random];
     }
 }

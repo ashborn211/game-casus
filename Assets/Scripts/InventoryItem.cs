@@ -19,39 +19,41 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
         itemIcon = GetComponent<Image>();
     }
 
-public void Initialize(Item item, InventorySlot parent)
-{
-    if (item == null)
+    public void Initialize(Item item, InventorySlot parent)
     {
-        Debug.Log("Attempted to initialize InventoryItem with a null Item.");
-        return;
+        if (item == null)
+        {
+            Debug.Log("Attempted to initialize InventoryItem with a null Item.");
+            return;
+        }
+
+        string assetPath = AssetDatabase.GetAssetPath(item);
+
+        if (!assetPath.EndsWith(".asset"))
+        {
+            Debug.Log("Attempted to initialize with a non-asset Item: " + item.name);
+            return; // Prevent initializing with a non-asset Item
+        }
+
+        activeSlot = parent;
+        activeSlot.myItem = this;
+        myItem = item;
+        itemIcon.sprite = item.sprite;
+
+        Debug.Log($"Initialized InventoryItem: {item.name} from path: {assetPath}");
     }
-
-    // Get the asset path of the item
-    string assetPath = AssetDatabase.GetAssetPath(item);
-
-    // Check if the item is a .asset file
-    if (!assetPath.EndsWith(".asset"))
-    {
-        Debug.Log("Attempted to initialize with a non-asset Item: " + item.name);
-        return; // Prevent initializing with a non-asset Item
-    }
-
-    activeSlot = parent;
-    activeSlot.myItem = this;
-    myItem = item;
-    itemIcon.sprite = item.sprite;
-
-    // Log the asset path of the item
-    Debug.Log($"Initialized InventoryItem: {item.name} from path: {assetPath}");
-}
-
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
             Inventory.Singleton.SetCarriedItem(this);
         }
+    }
+
+    // Property to access the armor type from the Item class
+    public Item.ArmorType armorType
+    {
+        get { return myItem != null ? myItem.armorType : Item.ArmorType.None; }
     }
 }
