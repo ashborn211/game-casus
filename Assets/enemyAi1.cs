@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class enemyAi1 : MonoBehaviour
 {
-    public movementPlayer movementPlayer;
+    public MovementPlayer movementPlayer;
 
     public float test2 = 0;
     public float movementSpeed = (float)6.0;
