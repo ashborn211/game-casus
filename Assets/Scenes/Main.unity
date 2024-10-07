@@ -1169,11 +1169,9 @@ MonoBehaviour:
     type: 3}
   items:
   - {fileID: 11400000, guid: 5b7ca39d927137548a3d23af8a1d850a, type: 2}
-  - {fileID: 11400000, guid: 9b5bf9bd7ce1ff547a00b276e27cb938, type: 2}
+  - {fileID: 11400000, guid: d1a4aedd628c67a4885889341267f946, type: 2}
   - {fileID: 11400000, guid: ae95ce17135ea564d8a6dec3fef09f0c, type: 2}
   - {fileID: 11400000, guid: 02cd9a38279b9584b8f72290a1efc5e2, type: 2}
-  - {fileID: 11400000, guid: 948c7f0463a0b9146a37f5cf053f1f15, type: 2}
-  - {fileID: 11400000, guid: 9531362353670304494a59c1ccff8990, type: 2}
   - {fileID: 11400000, guid: d0f7a0fcd9fa26a4ba161a461a2cc713, type: 2}
   giveItemBtn: {fileID: 1742144081}
 --- !u!1 &53742315
