@@ -13,4 +13,7 @@ public class Item : ScriptableObject
 
     [Header("Validity Check")]
     public bool isValidItem = true; // Add this field
+
+    [Header("DMG")]
+    public int damage; // Add this field
 }

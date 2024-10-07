@@ -16,3 +16,4 @@ MonoBehaviour:
   itemTag: 0
   equipmentPrefab: {fileID: 0}
   isValidItem: 1
+  damage: 25
