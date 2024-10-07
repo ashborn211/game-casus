@@ -21,38 +21,44 @@ public class Attack : MonoBehaviour
     }
 
     // Update is called once per frame
-    
+
     void Update()
     {
-        if(!inAttack){
+        if (!inAttack)
+        {
             Vector3 mousePos = Input.mousePosition;
-            targetAngel = Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135;
-            if(targetAngel > 360.0f){
-                targetAngel-=360.0f;
+            targetAngel = Angle(Screen.width / 2, Screen.height / 2, mousePos.x, mousePos.y) + 135;
+            if (targetAngel > 360.0f)
+            {
+                targetAngel -= 360.0f;
             }
-            currentAngel = mc.eulerAngles.y; 
+            currentAngel = mc.eulerAngles.y;
 
             // Debug.Log(mousePos.x + " x " + mousePos.y + " y of the " + Screen.width + " x " + Screen.height + " y");
             // Debug.Log(Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y));
-            
+
             clockwise = clockwiseFastestWay(targetAngel, currentAngel);
-            ratotasionSpeedTick = Time.deltaTime*ratotasionSpeed;
-            if(clockwise){
-                currentAngel+=ratotasionSpeedTick;
-                if(currentAngel > targetAngel){
+            ratotasionSpeedTick = Time.deltaTime * ratotasionSpeed;
+            if (clockwise)
+            {
+                currentAngel += ratotasionSpeedTick;
+                if (currentAngel > targetAngel)
+                {
                     currentAngel = targetAngel;
                 }
                 mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
             }
-            else{
-                currentAngel-=ratotasionSpeedTick;
-                if(currentAngel < targetAngel){
+            else
+            {
+                currentAngel -= ratotasionSpeedTick;
+                if (currentAngel < targetAngel)
+                {
                     currentAngel = targetAngel;
                 }
                 mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
             }
             // mc.localRotation = Quaternion.Euler(0,Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135,0);
-            
+
         }
     }
 
@@ -61,64 +67,81 @@ public class Attack : MonoBehaviour
         float adjacent;
         float opposite;
         float result;
+#pragma warning disable CS0219 // Variable is assigned but its value is never used
         int i;
-        if (x1 > x2){
+#pragma warning restore CS0219 // Variable is assigned but its value is never used
+        if (x1 > x2)
+        {
             adjacent = x1 - x2;
         }
-        else {
+        else
+        {
             adjacent = x2 - x1;
         }
 
-        if (y1 > y2){
+        if (y1 > y2)
+        {
             opposite = y1 - y2;
         }
-        else {
+        else
+        {
             opposite = y2 - y1;
         }
 
-        if  (x1 < x2){
-            if(y1 < y2){
-                result = ((Mathf.Atan(adjacent/opposite))*(180/Mathf.PI))+270;
-                i=0;
+        if (x1 < x2)
+        {
+            if (y1 < y2)
+            {
+                result = ((Mathf.Atan(adjacent / opposite)) * (180 / Mathf.PI)) + 270;
+                i = 0;
             }
-            else{
-                result = ((Mathf.Atan(opposite/adjacent))*(180/Mathf.PI))+0;
-                i=1;
+            else
+            {
+                result = ((Mathf.Atan(opposite / adjacent)) * (180 / Mathf.PI)) + 0;
+                i = 1;
             }
-        }       
-        else{
-            if(y1 < y2){
-                result = ((Mathf.Atan(opposite/adjacent))*(180/Mathf.PI))+180;
-                i=2;
+        }
+        else
+        {
+            if (y1 < y2)
+            {
+                result = ((Mathf.Atan(opposite / adjacent)) * (180 / Mathf.PI)) + 180;
+                i = 2;
             }
-            else{
-                result = ((Mathf.Atan(adjacent/opposite))*(180/Mathf.PI))+90;
-                i=3;
+            else
+            {
+                result = ((Mathf.Atan(adjacent / opposite)) * (180 / Mathf.PI)) + 90;
+                i = 3;
             }
         }
         //Debug.Log("r " + result + " a " + adjacent + " o " + opposite + " ratio " + (adjacent/opposite) + " case " + i);
         return result;
     }
 
-    bool clockwiseFastestWay(float target, float current){
-        float clockWay = target-current;
-        float counterClockway = current-target;
+    bool clockwiseFastestWay(float target, float current)
+    {
+        float clockWay = target - current;
+        float counterClockway = current - target;
 
-        if(clockWay<0.0f){
-            clockWay+=360.0f;
+        if (clockWay < 0.0f)
+        {
+            clockWay += 360.0f;
         }
 
-        if(counterClockway<0.0f){
-            counterClockway+=360.0f;
+        if (counterClockway < 0.0f)
+        {
+            counterClockway += 360.0f;
         }
 
-        if(clockWay<counterClockway){
+        if (clockWay < counterClockway)
+        {
             return true;
         }
-        else {
+        else
+        {
             return false;
         }
     }
 
-    
+
 }

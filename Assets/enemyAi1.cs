@@ -84,7 +84,9 @@ public class enemyAi1 : MonoBehaviour
         float adjacent;
         float opposite;
         float result;
+#pragma warning disable CS0219 // Variable is assigned but its value is never used
         int i;
+#pragma warning restore CS0219 // Variable is assigned but its value is never used
         if (x1 > x2){
             adjacent = x1 - x2;
         }
