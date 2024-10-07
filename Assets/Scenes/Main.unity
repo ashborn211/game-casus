@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18379976, g: 0.22911872, b: 0.30415422, a: 1}
+  m_IndirectSpecularColor: {r: 0.18379954, g: 0.2291184, b: 0.30415365, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -26057,8 +26057,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2dd4f23c6bb86548b7cf62a41551f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementPlayer: {fileID: 0}
-  attack: {fileID: 0}
+  movementPlayer: {fileID: 1512488594}
+  attack: {fileID: 1351558725}
   swordColider0: {fileID: -5495902117074765545, guid: a39cdbb34eea1f04eb8b95859a870211,
     type: 3}
   spearColider0: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
@@ -37664,7 +37664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1092e72b95302a4f844666cf8e0c30d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   parent: {fileID: 1803649426}
 --- !u!136 &1579493235
 CapsuleCollider:
