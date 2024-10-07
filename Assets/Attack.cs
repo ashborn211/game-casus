@@ -10,7 +10,11 @@ public class Attack : MonoBehaviour
     public bool inAttack = false;
     private float targetAngel = 0.0f;
     private float currentAngel = 0.0f;
+
+    private float ratotasionSpeedTick = 0.0f;
     private bool clockwise = true;
+
+    private float ratotasionSpeed = 360.0f; //per sec
     void Start()
     {
         mc = GetComponent<Transform>();
@@ -32,7 +36,22 @@ public class Attack : MonoBehaviour
             // Debug.Log(Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y));
             
             clockwise = clockwiseFastestWay(targetAngel, currentAngel);
-            mc.localRotation = Quaternion.Euler(0,Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135,0);
+            ratotasionSpeedTick = Time.deltaTime*ratotasionSpeed;
+            if(clockwise){
+                currentAngel+=ratotasionSpeedTick;
+                if(currentAngel > targetAngel){
+                    currentAngel = targetAngel;
+                }
+                mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
+            }
+            else{
+                currentAngel-=ratotasionSpeedTick;
+                if(currentAngel < targetAngel){
+                    currentAngel = targetAngel;
+                }
+                mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
+            }
+            // mc.localRotation = Quaternion.Euler(0,Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135,0);
             
         }
     }
