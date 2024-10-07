@@ -31,6 +31,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] Button giveItemBtn;
 
     private string saveFilePath;
+    private int currentHotbarIndex = 0; // Tracks the current hotbar selection
 
     void Awake()
     {

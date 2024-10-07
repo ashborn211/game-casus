@@ -54,7 +54,7 @@ public class AttackColiderSword : MonoBehaviour
         }
         else if(attackOnDelay){
             update+=Time.deltaTime;
-            Debug.Log(update);
+            // Debug.Log(update);
             if (update > attackLength){
                 boxCollider.enabled = false;
             }
