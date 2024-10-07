@@ -31,7 +31,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] Button giveItemBtn;
 
     private string saveFilePath;
-    private int currentHotbarIndex = 0; // Tracks the current hotbar selection
 
     void Awake()
     {
@@ -44,34 +43,9 @@ public class Inventory : MonoBehaviour
     {
         if (carriedItem == null) return;
         carriedItem.transform.position = Input.mousePosition;
-        HandleHotbarSelection();
     }
 
-    private void HandleHotbarSelection()
-    {
-        for (int i = 0; i < hotbarSlots.Length; i++)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-            {
-                UseHotbarItem(i);
-                break;
-            }
-        }
-    }
 
-    private void UseHotbarItem(int index)
-    {
-        if (index < 0 || index >= hotbarSlots.Length) return;
-
-        if (hotbarSlots[index]?.myItem != null)
-        {
-            Debug.Log($"Using item: {hotbarSlots[index].myItem.myItem.name}");
-        }
-        else
-        {
-            Debug.Log("No item in this hotbar slot.");
-        }
-    }
 
     [ContextMenu("Check Inventory Slot Assignment")]
     public void CheckInventorySlotAssignment()
