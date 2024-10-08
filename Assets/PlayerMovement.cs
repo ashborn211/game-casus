@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class movementPlayer : MonoBehaviour
@@ -10,12 +11,16 @@ public class movementPlayer : MonoBehaviour
     public float moveSpeed = 7;
     public float camAngel = 45;
     public float lastDirection = 0f;
-    private Vector3 velocity;
+    public Vector3 velocity;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        
     }
 
     // Update is called once per frame
@@ -47,6 +52,8 @@ public class movementPlayer : MonoBehaviour
         }
 
         rb.velocity = velocity;
+
+        
     }
 
     public Vector3 Velocity(float speed,float angle){

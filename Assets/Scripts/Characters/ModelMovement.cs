@@ -9,9 +9,16 @@ public class CharacterMovement : MonoBehaviour
 
     private float lastDirection = 0f;
 
+    private Animator animator;
+
+        private float inputDirX;
+    private float inputDirZ;
+
     void Start()
     {
         mc = transform.parent;
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -19,5 +26,17 @@ public class CharacterMovement : MonoBehaviour
     {
         lastDirection = movementPlayer.lastDirection;
         mc.localRotation = Quaternion.Euler(0, lastDirection*-1, 0);
+
+                inputDirX = Input.GetAxisRaw("Horizontal");
+        inputDirZ = Input.GetAxisRaw("Vertical");
+
+        if(inputDirX != 0 || inputDirZ != 0){
+            animator.SetFloat("speed", 1);
+        }
+        else{
+            animator.SetFloat("speed", 0);
+        }
+
+        
     }
 }
