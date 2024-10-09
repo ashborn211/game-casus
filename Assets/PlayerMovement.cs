@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class MovementPlayer : MonoBehaviour
@@ -9,8 +10,10 @@ public class MovementPlayer : MonoBehaviour
     private float inputDirZ;
     private float moveSpeed = 7;
     public float camAngel = 45;
-    private float lastDirection;
-    private Vector3 velocity;
+    public float lastDirection = 0f;
+    public Vector3 velocity;
+
+    
 
     public bool inAttack = false;
 
@@ -18,6 +21,8 @@ public class MovementPlayer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        
     }
 
     // Update is called once per frame
@@ -47,7 +52,7 @@ public class MovementPlayer : MonoBehaviour
             }
             else{
                 velocity = Velocity(moveSpeed, Direction(inputDirX, inputDirZ*-1) - camAngel - 90);
-                lastDirection = Direction(inputDirX*-1, inputDirZ);
+                lastDirection = Direction(inputDirX, inputDirZ*-1) - camAngel - 90;
             }
         }
         else{
@@ -55,6 +60,8 @@ public class MovementPlayer : MonoBehaviour
         }
 
         rb.velocity = velocity;
+
+        
     }
 
     public Vector3 Velocity(float speed,float angle){
