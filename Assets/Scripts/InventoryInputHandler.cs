@@ -4,7 +4,7 @@ public class InventoryInputHandler : MonoBehaviour
 {
     void Update()
     {
-        // Press 'S' to manually save the inventory
+        // Press 'G' to manually save the inventory
         if (Input.GetKeyDown(KeyCode.G))
         {
             Inventory.Singleton.SaveInventory();
