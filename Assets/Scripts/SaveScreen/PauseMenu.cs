@@ -38,7 +38,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Game is now paused.");
 
         // Unlock the cursor (if applicable)
-        Cursor.lockState = CursorLockMode.None;  
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Debug.Log("Cursor unlocked and made visible.");
     }
@@ -58,9 +58,6 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         Debug.Log("Game is now running.");
 
-        // Lock the cursor again (if applicable)
-        Cursor.lockState = CursorLockMode.Locked;  
-        Cursor.visible = false;
         Debug.Log("Cursor locked and made invisible.");
     }
 }
