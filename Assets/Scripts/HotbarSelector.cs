@@ -5,7 +5,7 @@ public class HotbarManager : MonoBehaviour
 {
     private InventorySlot[] hotbarSlots; // Reference to hotbar slots
     private int currentHotbarIndex = 0; // Track the currently selected hotbar slot
-    private Color selectedColor = new Color(1f, 1f, 0.5f); // Light color for highlighting
+    private Color selectedColor = Color.blue; // Light color for highlighting
     private Color unselectedColor = Color.white; // Default color for unselected slots
 
     private void Start()
@@ -57,24 +57,47 @@ public class HotbarManager : MonoBehaviour
 
     private void UpdateHotbarSelection()
     {
-        // Update the visual indication of selected slot, e.g., change color or highlight
+        // Update the visual indication of selected slot
         for (int i = 0; i < hotbarSlots.Length; i++)
         {
-            Image slotImage = hotbarSlots[i].GetComponent<Image>();
+            // Access the InventorySlot component
+            InventorySlot inventorySlot = hotbarSlots[i].GetComponent<InventorySlot>();
+
+            // Ensure the InventorySlot component is found
+            if (inventorySlot == null)
+            {
+                Debug.LogError($"No InventorySlot component found on GameObject at index {i}. Please check your prefab.");
+                continue; // Skip this iteration if InventorySlot component is not found
+            }
+
+            Image slotImage = inventorySlot.GetComponent<Image>();
+
+            // Ensure the Image component is found
+            if (slotImage == null)
+            {
+                Debug.LogError($"No Image component found on InventorySlot at index {i}. Please check your prefab.");
+                continue; // Skip this iteration if Image component is not found
+            }
 
             if (i == currentHotbarIndex)
             {
                 // Highlight selected slot
                 slotImage.color = selectedColor;
 
+                // Scale up the selected slot
+                hotbarSlots[i].transform.localScale = Vector3.one * 1.2f; // Adjust the multiplier as needed
+
                 // Log the selected slot and item
-                InventoryItem selectedItem = hotbarSlots[i].myItem;
+                InventoryItem selectedItem = inventorySlot.myItem;
                 Debug.Log($"Selected Slot: {i + 1}, Item: {(selectedItem != null ? selectedItem.myItem.name : "None")}");
             }
             else
             {
                 // Reset the color of unselected slots
                 slotImage.color = unselectedColor;
+
+                // Reset the scale of unselected slots
+                hotbarSlots[i].transform.localScale = Vector3.one; // Reset to original scale
             }
         }
     }
