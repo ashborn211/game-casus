@@ -36114,6 +36114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camAngel: 45
+  lastDirection: 0
+  velocity: {x: 0, y: 0, z: 0}
   inAttack: 0
 --- !u!54 &1512488595
 Rigidbody:

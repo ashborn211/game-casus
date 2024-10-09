@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    public movementPlayer movementPlayer;
+    public MovementPlayer movementPlayer;
     private Transform mc;
 
     private float lastDirection = 0f;
