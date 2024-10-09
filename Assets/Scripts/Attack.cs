@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
@@ -28,37 +29,27 @@ public class Attack : MonoBehaviour
         {
             Vector3 mousePos = Input.mousePosition;
             targetAngel = Angle(Screen.width / 2, Screen.height / 2, mousePos.x, mousePos.y) + 135;
-            if (targetAngel > 360.0f)
-            {
-                targetAngel -= 360.0f;
-            }
             currentAngel = mc.eulerAngles.y;
 
-            // Debug.Log(mousePos.x + " x " + mousePos.y + " y of the " + Screen.width + " x " + Screen.height + " y");
-            // Debug.Log(Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y));
-
-            clockwise = clockwiseFastestWay(targetAngel, currentAngel);
+            targetAngel = CorrectAngel(targetAngel);
+            currentAngel = CorrectAngel(currentAngel);
             ratotasionSpeedTick = Time.deltaTime * ratotasionSpeed;
-            if (clockwise)
-            {
-                currentAngel += ratotasionSpeedTick;
-                if (currentAngel > targetAngel)
-                {
-                    currentAngel = targetAngel;
-                }
-                mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
-            }
-            else
-            {
+            if(CorrectAngel(targetAngel-currentAngel)>CorrectAngel(currentAngel-targetAngel)){
                 currentAngel -= ratotasionSpeedTick;
-                if (currentAngel < targetAngel)
-                {
-                    currentAngel = targetAngel;
+                currentAngel = CorrectAngel(currentAngel);
+                if(currentAngel > targetAngel || currentAngel+ratotasionSpeedTick < targetAngel){
+                    mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
                 }
-                mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
+                Debug.Log("a");
             }
-            // mc.localRotation = Quaternion.Euler(0,Angle(Screen.width/2, Screen.height/2,mousePos.x,mousePos.y)+135,0);
-
+            else{
+                currentAngel += ratotasionSpeedTick;
+                currentAngel = CorrectAngel(currentAngel);
+                if(currentAngel < targetAngel || currentAngel-ratotasionSpeedTick > targetAngel){
+                    mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
+                }
+                Debug.Log("b");
+            }
         }
     }
 
@@ -118,29 +109,43 @@ public class Attack : MonoBehaviour
         return result;
     }
 
-    bool clockwiseFastestWay(float target, float current)
+    // bool ClockwiseFastestWay(float target, float current)
+    // {
+    //     float clockWay = target - current;
+    //     float counterClockway = current - target;
+
+    //     if (clockWay < 0.0f)
+    //     {
+    //         clockWay += 360.0f;
+    //     }
+
+    //     if (counterClockway < 0.0f)
+    //     {
+    //         counterClockway += 360.0f;
+    //     }
+
+    //     if (clockWay < counterClockway)
+    //     {
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // }
+
+    float CorrectAngel(float angel)
     {
-        float clockWay = target - current;
-        float counterClockway = current - target;
-
-        if (clockWay < 0.0f)
-        {
-            clockWay += 360.0f;
-        }
-
-        if (counterClockway < 0.0f)
-        {
-            counterClockway += 360.0f;
-        }
-
-        if (clockWay < counterClockway)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        // while(angel >= 360.0f || angel < 0.0f){
+        //     if(angel >= 360.0f){
+        //         angel =- 360.0f;
+        //     }
+        //     else if(angel < 0.0f){
+        //         angel =+ 360.0f;
+        //     }
+        // }
+        angel -= (math.floor(angel/360.0f))*360.0f;
+        return angel;
     }
 
 
