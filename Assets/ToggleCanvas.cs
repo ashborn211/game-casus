@@ -55,7 +55,7 @@ public class ToggleCanvas : MonoBehaviour
             else
             {
                 // Position the hotbar in the bottom right corner
-                hotbarRectTransform.anchoredPosition = new Vector2(-500, -200); // Adjust X and Y values as needed
+                hotbarRectTransform.anchoredPosition = new Vector2(-500, -312); // Adjust X and Y values as needed
             }
         }
     }
