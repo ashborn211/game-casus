@@ -5,7 +5,6 @@
 //***************************************************************************************
 
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static Esper.ESave.SaveFileSetupData;
@@ -15,6 +14,7 @@ namespace Esper.ESave.Example
     public class InfiniteSavesExample : MonoBehaviour
     {
         private const string timeElapsedKey = "TimeElapsed";
+        private const string inventoryDataKey = "InventoryData"; // Key for inventory data
 
         [SerializeField]
         private Button saveSlotPrefab;
@@ -28,10 +28,9 @@ namespace Esper.ESave.Example
         private Toggle modeToggle;
 
         private List<Button> slots = new();
-
         private float timeElapsed;
 
-        private bool loadMode { get => modeToggle.isOn; }
+        private bool loadMode => modeToggle.isOn;
 
         private void Start()
         {
@@ -47,14 +46,10 @@ namespace Esper.ESave.Example
 
         private void Update()
         {
-            // Only increment time when the game is not paused
-
-
+            // Increment time only if the game is not paused
             timeElapsed += Time.deltaTime;
             timeElapsedText.text = $"Time Elapsed: {timeElapsed}";
-
         }
-
 
         /// <summary>
         /// Creates a save slot for a save file.
@@ -98,10 +93,12 @@ namespace Esper.ESave.Example
             SaveFile saveFile = new SaveFile(saveFileSetupData);
 
             // Save the time elapsed
-            // Techincally, nothing is being overwitten at this stage since it is an empty save file
             OverwriteSave(saveFile);
 
-            // Create ths save slot for this data
+            // Save the inventory data
+            SaveInventoryData(saveFile);
+
+            // Create the save slot for this data
             CreateNewSaveSlot(saveFile);
         }
 
@@ -111,8 +108,12 @@ namespace Esper.ESave.Example
         /// <param name="saveFile">The save file.</param>
         public void LoadSave(SaveFile saveFile)
         {
+            // Load the time elapsed
             timeElapsed = saveFile.GetData<float>(timeElapsedKey);
             Debug.Log($"Loaded Time Elapsed: {timeElapsed}");
+
+            // Load inventory data
+            LoadInventoryData(saveFile);
         }
 
         /// <summary>
@@ -125,6 +126,26 @@ namespace Esper.ESave.Example
             saveFile.AddOrUpdateData(timeElapsedKey, timeElapsed);
             saveFile.Save();
             Debug.Log($"Saved Time Elapsed: {timeElapsed}");
+        }
+
+        /// <summary>
+        /// Saves the inventory data to the save file.
+        /// </summary>
+        private void SaveInventoryData(SaveFile saveFile)
+        {
+            InventoryData inventoryData = Inventory.Singleton.GetInventoryData(); // Method to retrieve inventory data
+            saveFile.AddOrUpdateData(inventoryDataKey, inventoryData);
+            saveFile.Save();
+            Debug.Log("Saved Inventory Data.");
+        }
+
+        /// <summary>
+        /// Loads the inventory data from the save file.
+        /// </summary>
+        private void LoadInventoryData(SaveFile saveFile)
+        {
+            InventoryData inventoryData = saveFile.GetData<InventoryData>(inventoryDataKey);
+            Inventory.Singleton.LoadInventoryData(inventoryData); // Method to load inventory data
         }
 
         /// <summary>
