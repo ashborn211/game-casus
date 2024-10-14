@@ -63,5 +63,21 @@
       "backgroundTask": false
     },
     "id": "InfiniteExampleSave3"
+  },
+  "InfiniteExampleSave4": {
+    "$type": "Esper.ESave.SavableObjects.SavableData`1[[Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": {
+      "$type": "Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "fileName": "InfiniteExampleSave4",
+      "saveLocation": 1,
+      "filePath": "StylishEsper/ESave/Examples/Any RP Examples",
+      "fileType": 0,
+      "encryptionMethod": 0,
+      "aesKey": null,
+      "aesIV": null,
+      "addToStorage": true,
+      "backgroundTask": false
+    },
+    "id": "InfiniteExampleSave4"
   }
 }
