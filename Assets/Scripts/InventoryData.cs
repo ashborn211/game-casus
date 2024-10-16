@@ -10,7 +10,7 @@ public class InventoryData
 public class ItemData
 {
     public string itemName;
-    public Item.ItemType itemType; // Change this line
+    public Item.ItemType itemType; // Ensure this refers to the correct enum/type
 
     public ItemData(string itemName, Item.ItemType itemType)
     {
@@ -18,5 +18,3 @@ public class ItemData
         this.itemType = itemType;
     }
 }
-
-

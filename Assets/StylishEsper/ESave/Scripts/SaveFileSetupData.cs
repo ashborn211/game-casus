@@ -1,10 +1,5 @@
-//***************************************************************************************
-// Writer: Stylish Esper
-// Last Updated: April 2024
-// Description: Save file data.
-//***************************************************************************************
-
 using Esper.ESave.Encryption;
+using UnityEngine;
 
 namespace Esper.ESave
 {
@@ -21,28 +16,13 @@ namespace Esper.ESave
         public bool addToStorage = true;
         public bool backgroundTask;
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         public SaveFileSetupData() 
         {
-            
+            // Default constructor
         }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="fileName">Save file name.</param>
-        /// <param name="saveLocation">Save location.</param>
-        /// <param name="filePath">File path after initial data path.</param>
-        /// <param name="fileType">Data type.</param>
-        /// <param name="encryptionMethod">Encryption method.</param>
-        /// <param name="aesKey">AES key.</param>
-        /// <param name="aesIV">AES IV.</param>
-        /// <param name="addToStorage">If this save file should be added to save storage.</param>
-        /// <param name="backgroundTask">If saving and loading data should occur in the background.</param>
         public SaveFileSetupData(string fileName, SaveLocation saveLocation, string filePath, FileType fileType, 
-            EncryptionMethod encryptionMethod, string aesKey, string aesIV,  bool addToStorage, bool backgroundTask)
+            EncryptionMethod encryptionMethod, string aesKey, string aesIV, bool addToStorage, bool backgroundTask)
         {
             this.fileName = fileName;
             this.saveLocation = saveLocation;
@@ -55,35 +35,61 @@ namespace Esper.ESave
             this.backgroundTask = backgroundTask;
         }
 
-        /// <summary>
-        /// Generates random tokens for the AES key and IV.
-        /// </summary>
         public void GenerateAESTokens()
         {
             aesKey = ESaveEncryption.GenerateRandomToken(16);
             aesIV = ESaveEncryption.GenerateRandomToken(16);
         }
 
-        /// <summary>
-        /// Save location types.
-        /// </summary>
+        public void SaveData(object data)
+        {
+            string fullPath = GetFullPath();
+
+            if (!string.IsNullOrEmpty(fullPath))
+            {
+                // Check if file already exists to avoid duplicate saves
+                if (!System.IO.File.Exists(fullPath))
+                {
+                    // Serialize your data and write to the file
+                    string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                    System.IO.File.WriteAllText(fullPath, jsonData);
+                    UnityEngine.Debug.Log($"Saved data to: {fullPath}");
+                }
+                else
+                {
+                    UnityEngine.Debug.LogWarning($"File already exists at: {fullPath}. Skipping save to avoid duplicates.");
+                }
+            }
+            else
+            {
+                UnityEngine.Debug.LogError("File path is invalid. Cannot save data.");
+            }
+        }
+
+        private string GetFullPath()
+        {
+            switch (saveLocation)
+            {
+                case SaveLocation.PersistentDataPath:
+                    return System.IO.Path.Combine(Application.persistentDataPath, filePath, fileName + ".json");
+                case SaveLocation.DataPath:
+                    return System.IO.Path.Combine(Application.dataPath, filePath, fileName + ".json");
+                default:
+                    return null;
+            }
+        }
+
         public enum SaveLocation
         {
             PersistentDataPath,
             DataPath
         }
 
-        /// <summary>
-        /// Supported file types.
-        /// </summary>
         public enum FileType
         {
             Json
         }
 
-        /// <summary>
-        /// Supported encryption methods.
-        /// </summary>
         public enum EncryptionMethod
         {
             None,
@@ -91,4 +97,3 @@ namespace Esper.ESave
         }
     }
 }
-

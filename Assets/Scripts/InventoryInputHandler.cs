@@ -1,19 +1,19 @@
-using UnityEngine;
+// using UnityEngine;
 
-public class InventoryInputHandler : MonoBehaviour
-{
-    void Update()
-    {
-        // Press 'G' to manually save the inventory
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Inventory.Singleton.SaveInventory();
-        }
+// public class InventoryInputHandler : MonoBehaviour
+// {
+//     void Update()
+//     {
+//         // Press 'G' to manually save the inventory
+//         if (Input.GetKeyDown(KeyCode.G))
+//         {
+//             Inventory.Singleton.SaveInventory();
+//         }
 
-        // Press 'L' to manually load the inventory
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Inventory.Singleton.LoadInventory();
-        }
-    }
-}
+//         // Press 'L' to manually load the inventory
+//         if (Input.GetKeyDown(KeyCode.L))
+//         {
+//             Inventory.Singleton.LoadInventory();
+//         }
+//     }
+// }

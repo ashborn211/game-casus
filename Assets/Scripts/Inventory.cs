@@ -8,10 +8,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using static Item; // For JSON serialization
 
-
-
 [System.Serializable]
-
 public class Inventory : MonoBehaviour
 {
     public static Inventory Singleton;
@@ -45,8 +42,6 @@ public class Inventory : MonoBehaviour
         carriedItem.transform.position = Input.mousePosition;
     }
 
-
-
     [ContextMenu("Check Inventory Slot Assignment")]
     public void CheckInventorySlotAssignment()
     {
@@ -67,52 +62,6 @@ public class Inventory : MonoBehaviour
                 Debug.Log("Slot " + i + " is assigned properly.");
             }
         }
-    }
-
-    public void SaveInventory()
-    {
-        InventoryData data = new InventoryData();
-
-        foreach (var slot in inventorySlots)
-        {
-            if (slot.myItem == null || slot.myItem.myItem == null)
-            {
-                Debug.Log("Empty slot found, skipping.");
-                continue;
-            }
-
-            ItemData itemData = new ItemData(slot.myItem.myItem.name, slot.myItem.myItem.itemType);
-            data.items.Add(itemData);
-        }
-
-        string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
-        File.WriteAllText(saveFilePath, jsonData);
-        Debug.Log("Inventory saved: " + jsonData);
-    }
-
-    public void LoadInventory()
-    {
-        if (!File.Exists(saveFilePath))
-        {
-            Debug.LogWarning("No save file found.");
-            return;
-        }
-
-        string jsonData = File.ReadAllText(saveFilePath, Encoding.UTF8);
-        InventoryData data = JsonConvert.DeserializeObject<InventoryData>(jsonData);
-
-        ClearInventory();
-
-        foreach (var itemData in data.items)
-        {
-            Item itemToLoad = System.Array.Find(items, i => i.name == itemData.itemName);
-            if (itemToLoad != null)
-            {
-                SpawnInventoryItem(itemToLoad);
-            }
-        }
-
-        Debug.Log("Inventory loaded: " + jsonData);
     }
 
     void ClearInventory()
@@ -198,5 +147,39 @@ public class Inventory : MonoBehaviour
         int random = Random.Range(0, items.Length);
         Debug.Log("Picked item: " + items[random]?.name ?? "Null item");
         return items[random];
+    }
+
+    // Method to retrieve the current inventory data
+    public InventoryData GetInventoryData()
+    {
+        InventoryData data = new InventoryData();
+        
+        foreach (var slot in inventorySlots)
+        {
+            if (slot.myItem == null || slot.myItem.myItem == null)
+                continue;
+
+            ItemData itemData = new ItemData(slot.myItem.myItem.name, slot.myItem.myItem.itemType);
+            data.items.Add(itemData);
+        }
+        
+        return data;
+    }
+
+    // Method to load inventory data
+    public void LoadInventoryData(InventoryData inventoryData)
+    {
+        ClearInventory();
+
+        foreach (var itemData in inventoryData.items)
+        {
+            Item itemToLoad = System.Array.Find(items, i => i.name == itemData.itemName);
+            if (itemToLoad != null)
+            {
+                SpawnInventoryItem(itemToLoad);
+            }
+        }
+
+        Debug.Log("Inventory loaded successfully.");
     }
 }
