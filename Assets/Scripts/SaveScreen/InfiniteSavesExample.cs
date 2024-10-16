@@ -41,7 +41,7 @@ namespace Esper.ESave.Example
             }
 
             // Save slot creator on-click event
-            saveSlotCreator.onClick.AddListener(CreateNewSave);
+            saveSlotCreator.onClick.AddListener(CreateNewSaveWrapper); // Use the wrapper method
         }
 
         private void Update()
@@ -73,24 +73,65 @@ namespace Esper.ESave.Example
 
             slots.Add(slot);
         }
+        private void CreateNewSaveWrapper()
+        {
+            // Create a new SaveFileSetupData instance (you might want to customize this based on your needs)
+            SaveFileSetupData saveFileData = new SaveFileSetupData
+            {
+                // Set properties as needed, or pull from a user interface or other sources
+                saveLocation = SaveFileSetupData.SaveLocation.PersistentDataPath // Example: just setting a default
+                                                                                 // Add any other necessary initialization
+            };
+
+            CreateNewSave(saveFileData); // Call the original method with the created data
+        }
 
         /// <summary>
         /// Creates a new save.
         /// </summary>
-        public void CreateNewSave()
+        public void CreateNewSave(SaveFileSetupData saveFileData)
         {
-            // Create the save file data
-            SaveFileSetupData saveFileSetupData = new()
+            // Determine the appropriate file path based on the save location
+            string basePath;
+
+            // Check the selected save location from the saveFileData instance
+            if (saveFileData.saveLocation == SaveFileSetupData.SaveLocation.PersistentDataPath)
             {
-                fileName = $"InfiniteExampleSave{SaveStorage.instance.saveCount}",
-                saveLocation = SaveLocation.DataPath,
-                filePath = "StylishEsper/ESave/Examples/Any RP Examples",
-                fileType = FileType.Json,
-                encryptionMethod = EncryptionMethod.None,
+                basePath = Application.persistentDataPath + "/Saves"; // Updated to include "Saves" folder
+            }
+            else
+            {
+                basePath = Application.dataPath + "/Saves"; // Use normal data path
+            }
+
+            // Ensure the directory exists
+            if (!System.IO.Directory.Exists(basePath))
+            {
+                System.IO.Directory.CreateDirectory(basePath);
+            }
+
+            // Create the save file data
+            SaveFileSetupData saveFileSetupData = new SaveFileSetupData
+            {
+                fileName = $"gameSaveData{SaveStorage.instance.saveCount}",
+                saveLocation = saveFileData.saveLocation, // Use the dynamically determined save location
+                filePath = basePath, // Set the determined file path
+                fileType = SaveFileSetupData.FileType.Json,
+                encryptionMethod = SaveFileSetupData.EncryptionMethod.None,
                 addToStorage = true
             };
 
             SaveFile saveFile = new SaveFile(saveFileSetupData);
+
+            // Get the full path to the save file
+            string fullPath = System.IO.Path.Combine(saveFileSetupData.filePath, saveFileSetupData.fileName + ".json");
+
+            // Validate the file path
+            if (string.IsNullOrEmpty(fullPath) || !System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(fullPath)))
+            {
+                Debug.LogError($"Invalid file path: {fullPath}. Cannot save data.");
+                return; // Exit the method if the path is invalid
+            }
 
             // Save the time elapsed
             OverwriteSave(saveFile);
@@ -101,6 +142,7 @@ namespace Esper.ESave.Example
             // Create the save slot for this data
             CreateNewSaveSlot(saveFile);
         }
+
 
         /// <summary>
         /// Loads a save.
