@@ -24,7 +24,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -32,6 +32,35 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations:
+    - serializedVersion: 16
+      name: Run-player
+      takeName: Run-player
+      internalID: -3597635613433425717
+      firstFrame: 0
+      lastFrame: 12
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Idle
       takeName: Idle
@@ -62,18 +91,47 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Run-player
-      takeName: Run-player
-      internalID: 7378147640952074531
+      name: attack-to-left-sword
+      takeName: attack-to-left-sword
+      internalID: -4731903220441381803
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack-to-right-sword
+      takeName: attack-to-right-sword
+      internalID: -8482209279543778335
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -140,132 +198,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: abstraction_character_model(Clone)
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Torso
-      parentName: abstraction_character_model(Clone)
-      position: {x: -0.015625, y: 0.09375, z: 0}
-      rotation: {x: 0, y: 0, z: 0.043619387, w: 0.99904823}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Torso_1
-      parentName: Torso
-      position: {x: 0.015625, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: LeftLeg
-      parentName: abstraction_character_model(Clone)
-      position: {x: -0.015625, y: 0.09375, z: -0.015625}
-      rotation: {x: 0, y: -0, z: -0.42261827, w: 0.9063078}
-      scale: {x: 1, y: 1, z: 1}
-    - name: UpperLeftLeg
-      parentName: LeftLeg
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0.10886688, w: 0.99405634}
-      scale: {x: 1, y: 1, z: 1}
-    - name: LowerLeftLeg
-      parentName: UpperLeftLeg
-      position: {x: -0.015625, y: -0.046875, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Lower Left Leg
-      parentName: LowerLeftLeg
-      position: {x: 0.03125, y: -0.015625, z: 0.015625}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Upper Left Leg
-      parentName: UpperLeftLeg
-      position: {x: 0.015625, y: -0.03125, z: 0.015625}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: RightLeg
-      parentName: abstraction_character_model(Clone)
-      position: {x: -0.015625, y: 0.09375, z: 0.078125}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: UpperRightLeg
-      parentName: RightLeg
-      position: {x: -0, y: 0, z: -0.0625}
-      rotation: {x: 0, y: 0, z: 0.043619387, w: 0.99904823}
-      scale: {x: 1, y: 1, z: 1}
-    - name: LowerRightLeg
-      parentName: UpperRightLeg
-      position: {x: -0.015625, y: -0.046875, z: 0}
-      rotation: {x: 0, y: 0, z: 0.59130967, w: 0.8064446}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Lower RightLeg
-      parentName: LowerRightLeg
-      position: {x: 0.035135757, y: -0.012504669, z: 0.015625}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Upper RightLeg
-      parentName: UpperRightLeg
-      position: {x: 0.015625, y: -0.03125, z: 0.015625}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: RightArm
-      parentName: abstraction_character_model(Clone)
-      position: {x: -0.015625, y: 0.171875, z: 0.046875}
-      rotation: {x: -0.04345341, y: 0.0038016802, z: -0.087072805, w: 0.9952465}
-      scale: {x: 1, y: 1, z: 1}
-    - name: UpperRightArm
-      parentName: RightArm
-      position: {x: -0.012310097, y: -0.0021623424, z: -0.00018918044}
-      rotation: {x: 0, y: -0, z: -0.3007058, w: 0.95371693}
-      scale: {x: 1, y: 1, z: 1}
-    - name: LowerRightArm
-      parentName: UpperRightArm
-      position: {x: 0.015625, y: -0.0390625, z: 0}
-      rotation: {x: 0, y: -0, z: -0.4422887, w: 0.89687276}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Lower Right Arm
-      parentName: LowerRightArm
-      position: {x: -0.015625, y: -0.0078125, z: 0.015625}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Upper Right Arm
-      parentName: UpperRightArm
-      position: {x: -0, y: -0.046875, z: 0.015625}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: LeftArm
-      parentName: abstraction_character_model(Clone)
-      position: {x: -0.015625, y: 0.171875, z: -0.046875}
-      rotation: {x: 0.13052619, y: -0, z: -0, w: 0.9914449}
-      scale: {x: 1, y: 1, z: 1}
-    - name: UpperLeftArm
-      parentName: LeftArm
-      position: {x: -0.012499999, y: 0.015625, z: 0}
-      rotation: {x: 0, y: 0, z: 0.3007058, w: 0.95371693}
-      scale: {x: 1, y: 1, z: 1}
-    - name: LowerLeftArm
-      parentName: UpperLeftArm
-      position: {x: 0.015625, y: -0.0546875, z: 0}
-      rotation: {x: 0, y: -0, z: -0.043619387, w: 0.99904823}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Lower Left Arm
-      parentName: LowerLeftArm
-      position: {x: -0, y: -0.0390625, z: 0.015625}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Upper Left Arm
-      parentName: UpperLeftArm
-      position: {x: 0.015625, y: -0.03125, z: 0.015625}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Head
-      parentName: abstraction_character_model(Clone)
-      position: {x: -0.009374999, y: 0.09375, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Head_1
-      parentName: Head
-      position: {x: -0, y: 0.09375, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -276,7 +209,7 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1

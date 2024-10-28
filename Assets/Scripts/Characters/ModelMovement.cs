@@ -27,7 +27,7 @@ public class CharacterMovement : MonoBehaviour
         lastDirection = movementPlayer.lastDirection;
         mc.localRotation = Quaternion.Euler(0, lastDirection*-1, 0);
 
-                inputDirX = Input.GetAxisRaw("Horizontal");
+        inputDirX = Input.GetAxisRaw("Horizontal");
         inputDirZ = Input.GetAxisRaw("Vertical");
 
         if(inputDirX != 0 || inputDirZ != 0){
