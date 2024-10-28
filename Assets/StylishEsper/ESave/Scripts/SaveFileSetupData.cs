@@ -6,7 +6,7 @@ namespace Esper.ESave
     [System.Serializable]
     public class SaveFileSetupData
     {
-        public string fileName = "SaveFileName";
+        public string fileName = "GameSaveData";
         public SaveLocation saveLocation;
         public string filePath = "Example/Path";
         public FileType fileType;
@@ -16,12 +16,12 @@ namespace Esper.ESave
         public bool addToStorage = true;
         public bool backgroundTask;
 
-        public SaveFileSetupData() 
+        public SaveFileSetupData()
         {
             // Default constructor
         }
 
-        public SaveFileSetupData(string fileName, SaveLocation saveLocation, string filePath, FileType fileType, 
+        public SaveFileSetupData(string fileName, SaveLocation saveLocation, string filePath, FileType fileType,
             EncryptionMethod encryptionMethod, string aesKey, string aesIV, bool addToStorage, bool backgroundTask)
         {
             this.fileName = fileName;
@@ -41,28 +41,45 @@ namespace Esper.ESave
             aesIV = ESaveEncryption.GenerateRandomToken(16);
         }
 
+        /// <summary>
+        /// Saves the provided data to a file, overwriting if necessary.
+        /// </summary>
         public void SaveData(object data)
         {
             string fullPath = GetFullPath();
 
             if (!string.IsNullOrEmpty(fullPath))
             {
-                // Check if file already exists to avoid duplicate saves
-                if (!System.IO.File.Exists(fullPath))
-                {
-                    // Serialize your data and write to the file
-                    string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(data);
-                    System.IO.File.WriteAllText(fullPath, jsonData);
-                    UnityEngine.Debug.Log($"Saved data to: {fullPath}");
-                }
-                else
-                {
-                    UnityEngine.Debug.LogWarning($"File already exists at: {fullPath}. Skipping save to avoid duplicates.");
-                }
+                // Serialize your data and write to the file, overwriting if it exists
+                string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                System.IO.File.WriteAllText(fullPath, jsonData); // Overwrite if exists
+                UnityEngine.Debug.Log($"Saved data to: {fullPath}");
             }
             else
             {
                 UnityEngine.Debug.LogError("File path is invalid. Cannot save data.");
+            }
+        }
+
+        /// <summary>
+        /// Loads the data from the save file if it exists.
+        /// </summary>
+        public T LoadData<T>()
+        {
+            string fullPath = GetFullPath();
+
+            if (!string.IsNullOrEmpty(fullPath) && System.IO.File.Exists(fullPath))
+            {
+                // Read the data from the file and deserialize it
+                string jsonData = System.IO.File.ReadAllText(fullPath);
+                T data = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jsonData);
+                UnityEngine.Debug.Log($"Loaded data from: {fullPath}");
+                return data;
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning($"No save file found at: {fullPath}. Returning default data.");
+                return default;
             }
         }
 
