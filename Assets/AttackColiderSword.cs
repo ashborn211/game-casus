@@ -8,13 +8,13 @@ public class AttackColiderSword : MonoBehaviour
 {
     public MovementPlayer movementPlayer;
     public Attack attack;
-    private int attackDamge = 5;
+    private int attackDamage = 5;
     private MeshCollider boxCollider;
     private Transform transformer;
 
-    public Mesh swordColider0;
+    public Mesh swordCollider0;
 
-    public Mesh spearColider0;
+    public Mesh spearCollider0;
 
     private float weaponSize;
 
@@ -24,6 +24,8 @@ public class AttackColiderSword : MonoBehaviour
 
     private float attackDelay = 0.5f;
     private float attackLength = 0.2f;
+
+    private MeshFilter meshFilter; //for debugging
 
     public enum WeaponType
     {
@@ -37,6 +39,7 @@ public class AttackColiderSword : MonoBehaviour
     {
         boxCollider = GetComponent<MeshCollider>();
         transformer = transform.GetComponent<Transform>();
+        meshFilter = GetComponent<MeshFilter>(); //for debugging
         SetWeaponType(WeaponType.sword);
         SetWeaponSize((float)0.75);
     }
@@ -78,17 +81,18 @@ public class AttackColiderSword : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log(collider.name + " ----------------------------------------------------------------------------------------------------------------------");
-        if (collider.GetComponent<Health>() != null)
+        Debug.Log(collider.name + "----------------------------------------------------------------------------------------------------------------------");
+        if (collider.GetComponent<Health>() != null && !(update > attackLength))// the code && !(update > attackLength) may create problems when attacking multiple targets
         {
             Health health = collider.GetComponent<Health>();
-            health.ChangeHealth(attackDamge * -1);
+            health.ChangeHealth(attackDamage * -1);
+            Debug.Log("wow");
         }
     }
 
     public void SetDamage(int damage)
     {
-        attackDamge = damage;
+        attackDamage = damage;
     }
 
     public void SetWeaponSize(float size)
@@ -106,11 +110,13 @@ public class AttackColiderSword : MonoBehaviour
         {
             if (type == WeaponType.sword)
             {
-                boxCollider.sharedMesh = swordColider0;
+                boxCollider.sharedMesh = swordCollider0;
+                meshFilter.mesh = swordCollider0; //for debugging
             }
             else if (type == WeaponType.spear)
             {
-                boxCollider.sharedMesh = spearColider0;
+                boxCollider.sharedMesh = spearCollider0;
+                meshFilter.mesh= spearCollider0; //for debugging
             }
             weaponType = type;
             Debug.Log(weaponSize);
@@ -122,8 +128,9 @@ public class AttackColiderSword : MonoBehaviour
     private void SetWeaponSizeForWeapon(float size){
         if (weaponType == WeaponType.sword)
         {
-            transformer.localPosition = new Vector3(0, 0, math.sqrt(2) * size);
+            transformer.localPosition = new Vector3(math.sqrt(2) * size, 0, math.sqrt(2) * size);
             transformer.localScale = new Vector3(100 * size, 100 * size, 20);
+            transform.localEulerAngles = new Vector3(90, 180, 0);
         }
         else if (weaponType == WeaponType.spear)
         {
