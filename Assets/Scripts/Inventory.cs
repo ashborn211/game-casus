@@ -82,7 +82,9 @@ public class Inventory : MonoBehaviour
         {
             if (item.activeSlot.armorType != ArmorType.None &&
                 item.activeSlot.armorType != (ArmorType)carriedItem.myItem.armorType)
-                return;
+                {
+                    return;
+                }
 
             item.activeSlot.SetItem(carriedItem);
         }
