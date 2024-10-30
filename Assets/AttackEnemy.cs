@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public enemyAi1 enemyAi;
+    public EnemyAi1 enemyAi;
 
     public AttackColliderEnemy attackColliderEnemy;
 

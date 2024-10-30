@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class enemyAi1 : MonoBehaviour
+public class EnemyAi1 : MonoBehaviour
 {
     public MovementPlayer movementPlayer;
 

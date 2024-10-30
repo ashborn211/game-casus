@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class AttackColiderSword : MonoBehaviour
+public class AttackColliderSword : MonoBehaviour
 {
     public MovementPlayer movementPlayer;
     public Attack attack;

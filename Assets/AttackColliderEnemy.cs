@@ -15,7 +15,7 @@ public class AttackColliderEnemy : MonoBehaviour
 
     private float attackDelay = 2.25f;
 
-    public enemyAi1 enemyAi;
+    public EnemyAi1 enemyAi;
 
     public bool inAttack = false;
 
