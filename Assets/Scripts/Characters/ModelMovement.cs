@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class ModelMovement : MonoBehaviour
 {
     public MovementPlayer movementPlayer;
     private Transform mc;
@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
 
     private Animator animator;
 
-        private float inputDirX;
+    private float inputDirX;
     private float inputDirZ;
 
     void Start()
@@ -27,7 +27,7 @@ public class CharacterMovement : MonoBehaviour
         lastDirection = movementPlayer.lastDirection;
         mc.localRotation = Quaternion.Euler(0, lastDirection*-1, 0);
 
-                inputDirX = Input.GetAxisRaw("Horizontal");
+        inputDirX = Input.GetAxisRaw("Horizontal");
         inputDirZ = Input.GetAxisRaw("Vertical");
 
         if(inputDirX != 0 || inputDirZ != 0){
@@ -36,7 +36,16 @@ public class CharacterMovement : MonoBehaviour
         else{
             animator.SetFloat("speed", 0);
         }
+    }
 
-        
+    public void PlayAttackAnimation(){
+        if (animator.GetBool("firstAttack")){
+            animator.SetTrigger("attack");
+            animator.SetBool("firstAttack", false);
+        }
+        if (!animator.GetBool("firstAttack")){
+            animator.SetTrigger("attack");
+            animator.SetBool("firstAttack", true);
+        }
     }
 }

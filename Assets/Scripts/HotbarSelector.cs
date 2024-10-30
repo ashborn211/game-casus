@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI; // Make sure to include this for UI components
 
-public class HotbarManager : MonoBehaviour
+public class HotbarSelector : MonoBehaviour
 {
     private InventorySlot[] hotbarSlots; // Reference to hotbar slots
     private int currentHotbarIndex = 0; // Track the currently selected hotbar slot

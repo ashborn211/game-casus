@@ -21,8 +21,6 @@ public class MovementPlayer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        
     }
 
     // Update is called once per frame
@@ -40,9 +38,6 @@ public class MovementPlayer : MonoBehaviour
         {
             moveSpeed = 7;
         }
-
-        
-
         inputDirX = Input.GetAxisRaw("Horizontal");
         inputDirZ = Input.GetAxisRaw("Vertical");
         if(inputDirX != 0 || inputDirZ != 0){
@@ -60,8 +55,6 @@ public class MovementPlayer : MonoBehaviour
         }
 
         rb.velocity = velocity;
-
-        
     }
 
     public Vector3 Velocity(float speed,float angle){
