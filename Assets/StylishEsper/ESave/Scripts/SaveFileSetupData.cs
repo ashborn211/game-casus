@@ -8,7 +8,7 @@ namespace Esper.ESave
     {
         public string fileName = "GameSaveData";
         public SaveLocation saveLocation;
-        public string filePath = "Example/Path";
+        public string filePath = "Saves"; // Ensure this is set correctly in your instance.
         public FileType fileType;
         public EncryptionMethod encryptionMethod;
         public string aesKey;
@@ -16,10 +16,7 @@ namespace Esper.ESave
         public bool addToStorage = true;
         public bool backgroundTask;
 
-        public SaveFileSetupData()
-        {
-            // Default constructor
-        }
+        public SaveFileSetupData() { }
 
         public SaveFileSetupData(string fileName, SaveLocation saveLocation, string filePath, FileType fileType,
             EncryptionMethod encryptionMethod, string aesKey, string aesIV, bool addToStorage, bool backgroundTask)
@@ -68,17 +65,26 @@ namespace Esper.ESave
         {
             string fullPath = GetFullPath();
 
-            if (!string.IsNullOrEmpty(fullPath) && System.IO.File.Exists(fullPath))
+            if (!string.IsNullOrEmpty(fullPath))
             {
-                // Read the data from the file and deserialize it
-                string jsonData = System.IO.File.ReadAllText(fullPath);
-                T data = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jsonData);
-                UnityEngine.Debug.Log($"Loaded data from: {fullPath}");
-                return data;
+                UnityEngine.Debug.Log($"Attempting to load from: {fullPath}");
+                if (System.IO.File.Exists(fullPath))
+                {
+                    // Read the data from the file and deserialize it
+                    string jsonData = System.IO.File.ReadAllText(fullPath);
+                    T data = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jsonData);
+                    UnityEngine.Debug.Log($"Loaded data from: {fullPath}");
+                    return data;
+                }
+                else
+                {
+                    UnityEngine.Debug.LogWarning($"No save file found at: {fullPath}. Returning default data.");
+                    return default;
+                }
             }
             else
             {
-                UnityEngine.Debug.LogWarning($"No save file found at: {fullPath}. Returning default data.");
+                UnityEngine.Debug.LogError("File path is invalid. Cannot load data.");
                 return default;
             }
         }

@@ -47,7 +47,7 @@ namespace Esper.ESave.Example
 
         public void CreateNewSaveSlot(SaveFile saveFile)
         {
-            string dataPath = Application.persistentDataPath + "Saves";
+            string dataPath = Application.persistentDataPath;
             Debug.Log($"Data Path: {dataPath}");
 
             // Instantiate the save slot
@@ -70,8 +70,8 @@ namespace Esper.ESave.Example
             SaveFileSetupData saveFileSetupData = new()
             {
                 fileName = $"GameSaveData{SaveStorage.instance.saveCount}",
-                saveLocation = SaveLocation.DataPath,
-                filePath = Application.persistentDataPath + "Saves",
+                saveLocation = SaveLocation.PersistentDataPath, // Ensure correct location
+                filePath = "", // Use empty for default directory
                 fileType = FileType.Json,
                 encryptionMethod = EncryptionMethod.None,
                 addToStorage = true
