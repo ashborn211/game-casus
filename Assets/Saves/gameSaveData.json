@@ -1,12 +1,12 @@
 {
   "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Esper.ESave.SavableObjects.SavableObject, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-  "gameSaveData0": {
+  "GameSaveData2": {
     "$type": "Esper.ESave.SavableObjects.SavableData`1[[Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "value": {
       "$type": "Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "fileName": "gameSaveData0",
-      "saveLocation": 0,
-      "filePath": "C:/Users/velic/AppData/LocalLow/DefaultCompany/game-project/Saves",
+      "fileName": "GameSaveData2",
+      "saveLocation": 1,
+      "filePath": "C:/Users/velic/AppData/LocalLow/DefaultCompany/game-projectSaves",
       "fileType": 0,
       "encryptionMethod": 0,
       "aesKey": null,
@@ -14,15 +14,15 @@
       "addToStorage": true,
       "backgroundTask": false
     },
-    "id": "gameSaveData0"
+    "id": "GameSaveData2"
   },
-  "gameSaveData1": {
+  "GameSaveData1": {
     "$type": "Esper.ESave.SavableObjects.SavableData`1[[Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "value": {
       "$type": "Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "fileName": "gameSaveData1",
-      "saveLocation": 0,
-      "filePath": "C:/Users/velic/AppData/LocalLow/DefaultCompany/game-project/Saves",
+      "fileName": "GameSaveData1",
+      "saveLocation": 1,
+      "filePath": "C:/Users/velic/AppData/LocalLow/DefaultCompany/game-projectSaves",
       "fileType": 0,
       "encryptionMethod": 0,
       "aesKey": null,
@@ -30,6 +30,38 @@
       "addToStorage": true,
       "backgroundTask": false
     },
-    "id": "gameSaveData1"
+    "id": "GameSaveData1"
+  },
+  "GameSaveData0": {
+    "$type": "Esper.ESave.SavableObjects.SavableData`1[[Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": {
+      "$type": "Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "fileName": "GameSaveData0",
+      "saveLocation": 1,
+      "filePath": "C:/Users/velic/AppData/LocalLow/DefaultCompany/game-projectSaves",
+      "fileType": 0,
+      "encryptionMethod": 0,
+      "aesKey": null,
+      "aesIV": null,
+      "addToStorage": true,
+      "backgroundTask": false
+    },
+    "id": "GameSaveData0"
+  },
+  "GameSaveData3": {
+    "$type": "Esper.ESave.SavableObjects.SavableData`1[[Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "value": {
+      "$type": "Esper.ESave.SaveFileSetupData, ESave, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "fileName": "GameSaveData3",
+      "saveLocation": 1,
+      "filePath": "C:/Users/velic/AppData/LocalLow/DefaultCompany/game-projectSaves",
+      "fileType": 0,
+      "encryptionMethod": 0,
+      "aesKey": null,
+      "aesIV": null,
+      "addToStorage": true,
+      "backgroundTask": false
+    },
+    "id": "GameSaveData3"
   }
 }

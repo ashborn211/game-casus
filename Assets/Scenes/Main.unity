@@ -27848,7 +27848,7 @@ MonoBehaviour:
   saveFileData:
     fileName: gameSaveData
     saveLocation: 0
-    filePath: Saves
+    filePath: 
     fileType: 0
     encryptionMethod: 0
     aesKey: 570IDGVQw0qB5q9u
