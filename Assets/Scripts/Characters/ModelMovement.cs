@@ -11,7 +11,7 @@ public class ModelMovement : MonoBehaviour
 
     private Animator animator;
 
-        private float inputDirX;
+    private float inputDirX;
     private float inputDirZ;
 
     void Start()
@@ -36,7 +36,16 @@ public class ModelMovement : MonoBehaviour
         else{
             animator.SetFloat("speed", 0);
         }
+    }
 
-        
+    public void PlayAttackAnimation(){
+        if (animator.GetBool("firstAttack")){
+            animator.SetTrigger("attack");
+            animator.SetBool("firstAttack", false);
+        }
+        if (!animator.GetBool("firstAttack")){
+            animator.SetTrigger("attack");
+            animator.SetBool("firstAttack", true);
+        }
     }
 }

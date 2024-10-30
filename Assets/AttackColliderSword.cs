@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class AttackColliderSword : MonoBehaviour
 {
+    public ModelMovement modelMovement;
     public MovementPlayer movementPlayer;
     public Attack attack;
     private int attackDamage = 5;
@@ -49,6 +50,8 @@ public class AttackColliderSword : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && !attackOnDelay)
         {
+            Debug.Log(modelMovement);
+            modelMovement.PlayAttackAnimation();
             attackOnDelay = true;
             boxCollider.enabled = true;
             update = 0;
