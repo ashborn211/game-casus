@@ -70,8 +70,8 @@ namespace Esper.ESave.Example
             SaveFileSetupData saveFileSetupData = new()
             {
                 fileName = $"GameSaveData{SaveStorage.instance.saveCount}",
-                saveLocation = SaveLocation.DataPath,
-                filePath = Application.persistentDataPath,
+                saveLocation = SaveLocation.PersistentDataPath, // Ensure correct location
+                filePath = "", // Use empty for default directory
                 fileType = FileType.Json,
                 encryptionMethod = EncryptionMethod.None,
                 addToStorage = true
