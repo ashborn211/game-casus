@@ -7,16 +7,15 @@ public class Health : MonoBehaviour
     public int maxHealth = 10;
     private int health;
     private GameObject objectGame;
-    public GameObject parent;
+    private GameObject parent;
     private bool death = false;
     // public HealtText healtText;
-    // public HealthSlider healthSlider;
-    
-
+    // public HealthSlider healthSlider
     
     void Start()
     {
         objectGame = gameObject;
+        parent = this.transform.parent.gameObject;
         health = maxHealth;
         // healtText?.SetHealthText(health, maxHealth);
         // healthSlider?.SetHealthSlider((float)health/(float)maxHealth*100f);

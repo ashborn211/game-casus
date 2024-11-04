@@ -8,13 +8,12 @@ public class Attack : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform mc;
-    public bool inAttack = false;
+    public bool inAttack {get; set;} = false;
     private float targetAngel = 0.0f;
     private float currentAngel = 0.0f;
 
     private float rotationSpeedTick = 0.0f;
     private bool clockwise = true;
-
     private float rotationSpeed = 360.0f; //per sec
     void Start()
     {

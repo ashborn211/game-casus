@@ -5,13 +5,19 @@ using UnityEngine;
 public class AttackEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public enemyAi1 enemyAi;
+    private EnemyAi1 enemyAi;
+    private GameObject parent;
 
-    public AttackColliderEnemy attackColliderEnemy;
+    private AttackColliderEnemy attackColliderEnemy;
+    private GameObject child;
 
     private Transform mc;
     void Start()
     {
+        parent = this.transform.parent.gameObject;
+        enemyAi = parent.GetComponent<EnemyAi1>();
+        child = this.transform.Find("GameObject").gameObject;
+        attackColliderEnemy = child.GetComponent<AttackColliderEnemy>();
         mc = GetComponent<Transform>();
     }
 
