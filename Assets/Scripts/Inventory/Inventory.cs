@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> hotbar;
     public List<InventorySlot> inventory;
     public InventorySlot ArmorSlot;
-    public int gold;
+    public int gold;xx
 
 
     private void Awake()
