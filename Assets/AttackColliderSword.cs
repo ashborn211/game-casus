@@ -7,8 +7,13 @@ using UnityEngine;
 public class AttackColliderSword : MonoBehaviour
 {
     public ModelMovement modelMovement;
-    public MovementPlayer movementPlayer;
-    public Attack attack;
+    
+    private MovementPlayer movementPlayer;
+    private GameObject grandParent;
+
+    private Attack attack;
+    private GameObject Parent;
+
     private int attackDamage = 5;
     private MeshCollider boxCollider;
     private Transform transformer;
@@ -32,12 +37,16 @@ public class AttackColliderSword : MonoBehaviour
     {
         sword = 0,
         spear,
-    }
+    } 
 
     private WeaponType weaponType = (WeaponType)(-1);
     // Start is called before the first frame update
     void Start()
     {
+        Parent = this.transform.parent.gameObject;
+        grandParent = Parent.transform.parent.gameObject;
+        attack = Parent.GetComponent<Attack>();
+        movementPlayer = grandParent.GetComponent<MovementPlayer>();
         boxCollider = GetComponent<MeshCollider>();
         transformer = transform.GetComponent<Transform>();
         meshFilter = GetComponent<MeshFilter>(); //for debugging

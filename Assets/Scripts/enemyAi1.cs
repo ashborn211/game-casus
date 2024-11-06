@@ -8,7 +8,7 @@ public class EnemyAi1 : MonoBehaviour
 {
     public MovementPlayer movementPlayer;
 
-    public float test2 = 0;
+    public float test2 { get; private set; } = 0;//distance from player rename variable
     public float movementSpeed = (float)6.0;
 
     private Vector3 velocity;
@@ -16,15 +16,19 @@ public class EnemyAi1 : MonoBehaviour
     private float velocityX;
     private float velocityZ; 
 
-    public float angel;
+    public float angel { get; private set;}= 0.0f;
 
-    public AttackColliderEnemy attackColliderEnemy;
+    private AttackColliderEnemy attackColliderEnemy;
 
     private Rigidbody rb;
+
+    private GameObject grandChild;
     // Start is called before the first frame update
     void Start()
     {
+        grandChild = (this.transform.Find("attackContainer").gameObject).transform.Find("GameObject").gameObject;//gets grand child with AttackColliderEnemy script
         rb = GetComponent<Rigidbody>();
+        attackColliderEnemy = grandChild.GetComponent<AttackColliderEnemy>(); 
     }
 
     // Update is called once per frame

@@ -10,12 +10,9 @@ public class MovementPlayer : MonoBehaviour
     private float inputDirZ;
     private float moveSpeed = 7;
     public float camAngel = 45;
-    public float lastDirection = 0f;
-    public Vector3 velocity;
-
-    
-
-    public bool inAttack = false;
+    public float lastDirection { get; private set; } = 0f;
+    private Vector3 velocity;
+    public bool inAttack { get; set; } = false;
 
     // Start is called before the first frame update
     void Start()

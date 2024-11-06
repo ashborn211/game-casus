@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackColliderEnemy : MonoBehaviour
 {
     private MeshCollider boxCollider;
-    private int attackDamage = 0;
+    private int attackDamage = 3;
 
     private float update = 0.0f;
 
@@ -15,13 +15,16 @@ public class AttackColliderEnemy : MonoBehaviour
 
     private float attackDelay = 2.25f;
 
-    public EnemyAi1 enemyAi;
+    private EnemyAi1 enemyAi;
+    private GameObject grandParent;
 
-    public bool inAttack = false;
+    public bool inAttack { get; private set; } = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        grandParent = (this.transform.parent.gameObject).transform.parent.gameObject;
+        enemyAi = grandParent.GetComponent<EnemyAi1>();
         boxCollider = GetComponent<MeshCollider>();
     }
 
