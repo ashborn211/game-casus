@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    public GameObject pauseMenuUI;  // Reference to the pause menu UI (Canvas)
-    private bool isPaused = false;  // Flag to check if the game is paused
+    public GameObject pauseMenuUI;
+    private bool Paused = false;
 
 
 
     void Start()
     {
-        // Ensure the pause menu is hidden initially
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(false);
@@ -18,10 +17,9 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        // Toggle pause when the player presses the Escape key
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
+            if (Paused)
             {
                 ResumeGame();
             }
@@ -32,25 +30,23 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    // Function to pause the game
     public void PauseGame()
     {
         if (pauseMenuUI != null)
         {
-            pauseMenuUI.SetActive(true);  // Show the pause menu
+            pauseMenuUI.SetActive(true);
         }
-        Time.timeScale = 0f;  // Stop the game time
-        isPaused = true;
+        Time.timeScale = 0f;
+        Paused = true;
     }
 
-    // Function to resume the game
     public void ResumeGame()
     {
         if (pauseMenuUI != null)
         {
-            pauseMenuUI.SetActive(false);  // Hide the pause menu
+            pauseMenuUI.SetActive(false);
         }
-        Time.timeScale = 1f;  // Resume the game time
-        isPaused = false;
+        Time.timeScale = 1f;
+        Paused = false;
     }
 }

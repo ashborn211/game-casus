@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 321584547}
   - component: {fileID: 321584548}
   m_Layer: 0
-  m_Name: MenuController
+  m_Name: StartMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
