@@ -1,37 +1,35 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject saveScreenCanvas; // Reference to your save screen canvas GameObject
-    private bool isPaused = false;
+    private PauseManager pauseManager;  // Reference to the PauseManager instance
 
+    // Start method to find the PauseManager instance
     void Start()
     {
-        // Ensure the save screen canvas is off by default
-        if (saveScreenCanvas != null)
+        // Find the PauseManager instance in the scene
+        pauseManager = FindObjectOfType<PauseManager>();
+
+        if (pauseManager == null)
         {
-            saveScreenCanvas.SetActive(false);
+            Debug.LogError("PauseManager not found in the scene!");
         }
     }
 
-    void Update()
+    // Function to resume the game
+    public void ResumeGame()
     {
-        // Check if the ESC key is pressed
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (pauseManager != null)
         {
-            Debug.Log("ESC key pressed.");
-            ToggleSaveScreen(); // Toggle save screen visibility
+            pauseManager.ResumeGame();  // Call ResumeGame on the PauseManager instance
         }
     }
 
-    // Toggle the save screen
-    void ToggleSaveScreen()
+    // Function to exit the game and go to the Main Menu
+    public void ExitToMainMenu()
     {
-        isPaused = !isPaused; // Toggle the paused state
-        if (saveScreenCanvas != null)
-        {
-            saveScreenCanvas.SetActive(isPaused); // Show or hide the save screen based on isPaused
-        }
-        Debug.Log(isPaused ? "Save screen activated." : "Save screen deactivated.");
+        Time.timeScale = 1f;  // Ensure game is unpaused
+        SceneManager.LoadScene("Main-Menu");  // Load Main Menu scene
     }
 }
