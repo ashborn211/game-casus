@@ -1,59 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public const int HOTBAR_SIZE = 5;
-    public const int INVENTORY_SIZE = 15;
-
-    public List<InventorySlot> hotbar;
-    public List<InventorySlot> inventory;
+    public Hotbar hotbar;
+    [SerializeField] public GameObject[] inventory;
     public InventorySlot ArmorSlot;
-    public int gold;xx
+    public int gold;
 
+    [Header("Item List")]
+    [SerializeField] Item[] items;
 
-    private void Awake()
-    {
-        hotbar = InitializeHotbar(HOTBAR_SIZE);
-        inventory = InitializeInventory(INVENTORY_SIZE);
-        ArmorSlot = InitializeArmorSlot();
-    }
-
-    private List<InventorySlot> InitializeHotbar(int size)
-    {
-        List<InventorySlot> hotbar = new List<InventorySlot>();
-        for (int i = 0; i < size; i++)
-        {
-            hotbar.Add(new InventorySlot());
-        }
-        return hotbar;
-    }
-
-    private List<InventorySlot> InitializeInventory(int size)
-    {
-        List<InventorySlot> inventory = new List<InventorySlot>();
-        for (int i = 0; i < size; i++)
-        {
-            inventory.Add(new InventorySlot());
-        }
-        return inventory;
-    }
+    public GameObject inventoryPanel;
+    public bool InventoryOpen = false;
 
     private InventorySlot InitializeArmorSlot()
     {
         return new InventorySlot();
     }
 
+    public void onclick(int slot)
+    {
+        slot--;
+        Debug.Log("Slot " + slot + " clicked");
+    }
+
+    public void ToggleInventory()
+    { //false         = !false = true
+        InventoryOpen = !InventoryOpen;
+        inventoryPanel.SetActive(InventoryOpen);
+    }
+
+    public void GiveRandomItem()
+    {
+        inventory[0].AddItem(items[Random.Range(0, items.Length)]);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
+        inventoryPanel.SetActive(InventoryOpen);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ToggleInventory();
+        }
     }
 }
