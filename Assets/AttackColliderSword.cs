@@ -27,7 +27,7 @@ public class AttackColliderSword : MonoBehaviour
 
     private bool attackOnDelay = false;
 
-    private float attackDelay = 0.5f;
+    private float attackDelay = 0.6f;
     private float attackLength = 0.2f;
 
     private MeshFilter meshFilter; //for debugging
@@ -63,20 +63,15 @@ public class AttackColliderSword : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !attackOnDelay)
         {
             if(rightSlash){
-                //right slash animation
-
+                modelMovement.PlayAttackAnimationToLeft();
                 rightSlash = false;
-                Debug.Log("Right");
                 update2 = 0.0f;
             }
             else{
-                //left slash animation
-                
+                modelMovement.PlayAttackAnimationToRight();
                 rightSlash = true;
-                Debug.Log("Lefty");
             }
             Debug.Log(modelMovement);
-            modelMovement.PlayAttackAnimation();
             attackOnDelay = true;
             boxCollider.enabled = true;
             update = 0;
