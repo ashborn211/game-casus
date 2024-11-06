@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     private int health;
     private GameObject objectGame;
     private GameObject parent;
-    private bool death = false;
+    public bool death { get; private set; } = false;
     // public HealtText healtText;
     // public HealthSlider healthSlider
     
@@ -25,8 +25,7 @@ public class Health : MonoBehaviour
         if(health <=0 && !death){
             Debug.Log(objectGame.name + " death ---------------------------------------------------------------------");
             death = true;
-            Destroy(parent);
-            Destroy(gameObject);
+            parent.SetActive(false);
         }
     }
     public void ChangeHealth(int healthAmount){
@@ -50,6 +49,11 @@ public class Health : MonoBehaviour
         health = maxHealth;
     }
 
+    public void Revive(){
+        parent.SetActive(true);
+        death = false;
+    }
+
     public int ChekHealth(){
         return health;
     }
@@ -57,9 +61,4 @@ public class Health : MonoBehaviour
     public int ChekMaxHealth(){
         return maxHealth;
     }
-
-    public bool ChekDeath(){
-        return death;
-    }
-
 }
