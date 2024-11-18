@@ -6,7 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public Hotbar hotbar;
-    [SerializeField] public GameObject[] inventory;
+    [SerializeField] public InventorySlot[] inventory;
     public InventorySlot ArmorSlot;
     public int gold;
 
@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
 
     public void GiveRandomItem()
     {
-        inventory[0].AddItem(items[Random.Range(0, items.Length)]);
+        // Get a random item
     }
 
     // Start is called before the first frame update
