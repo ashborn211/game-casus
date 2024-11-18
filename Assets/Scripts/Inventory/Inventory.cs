@@ -6,7 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public Hotbar hotbar;
-    [SerializeField] public InventorySlot[] inventory;
+    public GameObject[] inventory;
     public InventorySlot ArmorSlot;
     public int gold;
 
@@ -25,6 +25,8 @@ public class Inventory : MonoBehaviour
     {
         slot--;
         Debug.Log("Slot " + slot + " clicked");
+        // get the gameObject script and run the function
+        inventory[slot].GetComponent<InventorySlot>().AddItem();
     }
 
     public void ToggleInventory()

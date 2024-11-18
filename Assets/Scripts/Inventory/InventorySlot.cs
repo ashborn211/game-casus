@@ -5,27 +5,37 @@ using UnityEngine;
 public class InventorySlot : MonoBehaviour
 {
 
-    public GameObject item;
+    public Item item = null;
     public bool isEmpty = true;
 
-    public void AddItem(GameObject item)
+    [Header("Sprite Renderer")]
+    public GameObject spriteRenderer;
+
+    //Item newItem
+    public void AddItem()
     {
-        if (!isEmpty)
-        {
-            return;
-        }
-        this.item = item;
-        isEmpty = false;
+        Debug.Log("Adding item to slot...");
+        // if (item != null)
+        // {
+        //     Debug.Log("Slot already contains an item!");
+        //     return;
+        // }
+        // item = newItem;
     }
 
     public void RemoveItem()
     {
-        if (isEmpty)
+        if (item == null)
         {
+            Debug.Log("Slot is empty!");
             return;
         }
-        this.item = null;
-        isEmpty = true;
+        item = null;
+    }
+
+    public void SetSprite()
+    {
+
     }
 
     // Start is called before the first frame update
