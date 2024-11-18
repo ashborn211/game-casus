@@ -61,7 +61,7 @@ public class AttackColliderEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log(collider.name + " ----------------------------------------------------------------------------------------------------------------------");
+        Debug.Log(collider.tag + " ----------------------------------------------------------------------------------------------------------------------");
         if (collider.GetComponent<Health>() != null && !(update > attackLength))//the code !(update > attackLength) may create problems when attacking multiple targets. the code collider.GetComponent<Health>() != null may make freindly fire possible
         {
             Health health = collider.GetComponent<Health>();
