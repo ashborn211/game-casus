@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -11,7 +10,9 @@ public class Inventory : MonoBehaviour
     public int gold;
 
     [Header("Item List")]
-    [SerializeField] Item[] items;
+    [SerializeField] private Item[] items;
+
+    private Item selectedItem;
 
     public GameObject inventoryPanel;
     public bool InventoryOpen = false;
@@ -21,23 +22,49 @@ public class Inventory : MonoBehaviour
         return new InventorySlot();
     }
 
-    public void onclick(int slot)
+    public void OnClick(int slot)
     {
         slot--;
         Debug.Log("Slot " + slot + " clicked");
-        // get the gameObject script and run the function
-        inventory[slot].GetComponent<InventorySlot>().AddItem();
+
+        InventorySlot clickedSlot = inventory[slot].GetComponent<InventorySlot>();
+
+        if (selectedItem != null)
+        {
+            // Assign the selected item to the clicked slot
+            if (clickedSlot.isEmpty)
+            {
+                clickedSlot.AddItem(selectedItem);
+                clickedSlot.isEmpty = false;
+                selectedItem = null; 
+                Debug.Log("Item assigned to slot.");
+            }
+            else
+            {
+                Debug.Log("Slot is already occupied.");
+            }
+        }
+        else
+        {
+            // Select the item from the clicked slot if it's not empty
+            if (!clickedSlot.isEmpty)
+            {
+                selectedItem = clickedSlot.item;
+                clickedSlot.RemoveItem();
+                clickedSlot.isEmpty = true;
+                Debug.Log("Item selected from slot.");
+            }
+            else
+            {
+                Debug.Log("Slot is empty.");
+            }
+        }
     }
 
     public void ToggleInventory()
-    { //false         = !false = true
+    {
         InventoryOpen = !InventoryOpen;
         inventoryPanel.SetActive(InventoryOpen);
-    }
-
-    public void GiveRandomItem()
-    {
-        // Get a random item
     }
 
     // Start is called before the first frame update
