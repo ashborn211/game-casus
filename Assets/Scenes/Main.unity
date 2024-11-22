@@ -683,20 +683,20 @@ MonoBehaviour:
   hotbar: {fileID: 0}
   inventory:
   - {fileID: 1330706691}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1669292011}
+  - {fileID: 855055157}
+  - {fileID: 1987474102}
+  - {fileID: 2115741341}
+  - {fileID: 2076529547}
+  - {fileID: 1452428031}
+  - {fileID: 345214678}
+  - {fileID: 789924319}
+  - {fileID: 158630367}
+  - {fileID: 896464318}
+  - {fileID: 893509524}
+  - {fileID: 305569328}
+  - {fileID: 738329736}
+  - {fileID: 1022855937}
   ArmorSlot: {fileID: 0}
   gold: 0
   items:
