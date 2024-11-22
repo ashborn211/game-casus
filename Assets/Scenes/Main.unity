@@ -1155,7 +1155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  parent: {fileID: 377191904}
 --- !u!136 &63876466
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8616,9 +8615,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camAngel: 45
-  lastDirection: 0
-  velocity: {x: 0, y: 0, z: 0}
-  inAttack: 0
 --- !u!54 &377191908
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10600,7 +10596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367f51d472176ca4fb2e0b4aea82a8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inAttack: 0
 --- !u!1 &457658461
 GameObject:
   m_ObjectHideFlags: 0
@@ -19185,8 +19180,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelMovement: {fileID: 376554028}
-  movementPlayer: {fileID: 377191907}
-  attack: {fileID: 456541356}
   swordCollider0: {fileID: -5495902117074765545, guid: a39cdbb34eea1f04eb8b95859a870211,
     type: 3}
   spearCollider0: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
@@ -30767,7 +30760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 5b7ca39d927137548a3d23af8a1d850a, type: 2}
-  isEmpty: 1
+  isEmpty: 0
   spriteRenderer: {fileID: 1089679959}
 --- !u!114 &1330706694
 MonoBehaviour:
@@ -37196,7 +37189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  parent: {fileID: 1803649426}
 --- !u!136 &1579493235
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -42863,10 +42855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementPlayer: {fileID: 0}
-  test2: 0
   movementSpeed: 9.5
-  angel: 0
-  attackColliderEnemy: {fileID: 0}
 --- !u!54 &1803649428
 Rigidbody:
   m_ObjectHideFlags: 0
