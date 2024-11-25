@@ -14,6 +14,10 @@ public class Health : MonoBehaviour
     public bool death { get; private set; } = false;
     private bool isPlayer = false;
 
+    private GameObject gameOverScreenObject;
+
+    private GameOverScreen gameOverScreen;
+
     private HealthSlider healthSlider;
     // public HealtText healtText;
     // public HealthSlider healthSlider
@@ -27,6 +31,12 @@ public class Health : MonoBehaviour
             Debug.Log("player exists :3");
             isPlayer = true;
             healthSlider = GameObject.FindWithTag("HealthSlider").GetComponent<HealthSlider>();
+            gameOverScreenObject = GameObject.FindWithTag("GameOverScreen");
+            if(gameOverScreenObject != null){
+                Debug.Log("gameOverScreenObject");
+                gameOverScreen = gameOverScreenObject.GetComponent<GameOverScreen>();
+                gameOverScreen?.Revive();
+            }
         }
 
         SetMaxHealth(baseHealth);
@@ -39,6 +49,7 @@ public class Health : MonoBehaviour
         if(health <=0 && !death){
             Debug.Log(objectGame.name + " death ---------------------------------------------------------------------");
             death = true;
+            gameOverScreen?.GameOver();
             parent.SetActive(false);
         }
     }

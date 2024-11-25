@@ -59,7 +59,6 @@ public class AttackColliderSword : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && !attackOnDelay)
         {
-            Debug.Log(modelMovement);
             modelMovement.PlayAttackAnimation();
             attackOnDelay = true;
             boxCollider.enabled = true;
@@ -69,7 +68,6 @@ public class AttackColliderSword : MonoBehaviour
         }
         else if(attackOnDelay){
             update+=Time.deltaTime;
-            // Debug.Log(update);
             if (update > attackLength){
                 boxCollider.enabled = false;
             }
@@ -131,7 +129,6 @@ public class AttackColliderSword : MonoBehaviour
                 meshFilter.mesh= spearCollider0; //for debugging
             }
             weaponType = type;
-            Debug.Log(weaponSize);
             SetWeaponSizeForWeapon(weaponSize);
             
         }
