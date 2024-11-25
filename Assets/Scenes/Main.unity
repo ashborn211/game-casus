@@ -44141,7 +44141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79465a8a1024ec0418de4ede325a5ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementPlayer: {fileID: 0}
+  movementPlayer: {fileID: 377191907}
   movementSpeed: 9.5
 --- !u!54 &1803649428
 Rigidbody:
