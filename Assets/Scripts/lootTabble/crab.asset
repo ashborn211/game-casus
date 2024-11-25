@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf26e8bcf26326944a98bc99ad8c2e9c, type: 3}
   m_Name: crab
   m_EditorClassIdentifier: 
-  GuaranteedDrops: []
-  OptionalDrops: []
+  GuaranteedDrops:
+  - MinCount: 2
+    MaxCount: 5
+    Drop: {fileID: 62596655522181336, guid: 7f78fdc43bf6fe64f96c208dfedfd6a4, type: 3}
+  OptionalDrops:
+  - MinCount: 0
+    MaxCount: 1
+    Drop: {fileID: 0}
+    Weight: 10
   NoDropWeight: 100
