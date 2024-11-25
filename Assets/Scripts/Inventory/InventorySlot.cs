@@ -11,12 +11,15 @@ public class InventorySlot : MonoBehaviour
     [Header("Sprite Renderer")]
     public GameObject spriteRenderer;
 
-    public void AddItem(Item newItem)
+    [Header("Button")]
+    public Button button;
+
+    public bool AddItem(Item newItem)
     {
-        if (item != null)
+        if (!isEmpty)
         {
             Debug.LogError("Slot already contains an item!");
-            return;
+            return false;
         }
 
         item = newItem;
@@ -25,6 +28,7 @@ public class InventorySlot : MonoBehaviour
         Debug.Log("Item added to slot: " + newItem.name);
         // Update the sprite here
         SetSprite();
+        return true;
     }
 
     public void RemoveItem()
@@ -40,7 +44,6 @@ public class InventorySlot : MonoBehaviour
         item = null;
         isEmpty = true;
         SetSprite();
-
     }
 
     //Method to update the sprite
@@ -75,6 +78,21 @@ public class InventorySlot : MonoBehaviour
         {
             Debug.LogError($"[InventorySlot] No Image component found on spriteRenderer for slot {gameObject.name}");
         }
+    }
+
+    public void AddHighlight()
+    {
+        button.image.color = Color.yellow;
+    }
+
+    public void RemoveHighlight()
+    {
+        button.image.color = Color.white;
+    }
+
+    void Start()
+    {
+        SetSprite();
     }
 
 }

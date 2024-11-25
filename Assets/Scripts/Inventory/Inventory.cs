@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public static int NOT_SELECTED = -1;
+
     public Hotbar hotbar;
     public GameObject[] inventory;
     public InventorySlot ArmorSlot;
@@ -12,7 +14,7 @@ public class Inventory : MonoBehaviour
     [Header("Item List")]
     [SerializeField] private Item[] items;
 
-    private Item selectedItem;
+    private int selectedSlot = NOT_SELECTED;
 
     public GameObject inventoryPanel;
     public bool InventoryOpen = false;
@@ -27,38 +29,92 @@ public class Inventory : MonoBehaviour
         slot--;
         Debug.Log("Slot " + slot + " clicked");
 
-        InventorySlot clickedSlot = inventory[slot].GetComponent<InventorySlot>();
+        InventorySlot clickedSlot = GetSlot(slot);
 
-        if (selectedItem != null)
+        Debug.Log("Slot Selected" + selectedSlot);
+
+        if (slot == selectedSlot)
         {
-            // Assign the selected item to the clicked slot
-            if (clickedSlot.isEmpty)
+            DeselectItem();
+            return;
+        }
+
+        if (selectedSlot != NOT_SELECTED)
+        {
+            if (!clickedSlot.AddItem(GetItem(selectedSlot)))
             {
-                clickedSlot.AddItem(selectedItem);
-                clickedSlot.isEmpty = false;
-                selectedItem = null; 
-                Debug.Log("Item assigned to slot.");
+              return;
             }
-            else
-            {
-                Debug.Log("Slot is already occupied.");
-            }
+            GetSlot(selectedSlot).RemoveItem();
+            GetSlot(selectedSlot).RemoveHighlight();
+            selectedSlot = NOT_SELECTED;
         }
         else
         {
-            // Select the item from the clicked slot if it's not empty
-            if (!clickedSlot.isEmpty)
-            {
-                selectedItem = clickedSlot.item;
-                clickedSlot.RemoveItem();
-                clickedSlot.isEmpty = true;
-                Debug.Log("Item selected from slot.");
-            }
-            else
+            if (clickedSlot.item == null)
             {
                 Debug.Log("Slot is empty.");
+                return;
+            }
+            SelectSlot(slot);
+            GetSlot(slot).AddHighlight();
+        }
+    }
+
+    public void DeselectItem()
+    {
+        Debug.Log("Deselecting item.");
+        GetSlot(selectedSlot).RemoveHighlight();
+        selectedSlot = NOT_SELECTED;
+
+    }
+
+    public InventorySlot GetSlot(int slot)
+    {
+        return inventory[slot].GetComponent<InventorySlot>();
+    }
+
+    public Item GetItem(int slot)
+    {
+        return GetSlot(slot).item;
+    }
+
+    public void SelectSlot(int Slot)
+    {
+        selectedSlot = Slot;
+    }
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
+    }
+
+    public void RemoveGold(int amount)
+    {
+        gold -= amount;
+    }
+
+    public void AddItem(Item item)
+    {
+        // Add the item to the first empty slot
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            InventorySlot slot = inventory[i].GetComponent<InventorySlot>();
+            if (slot.isEmpty)
+            {
+                slot.AddItem(item);
+                Debug.Log("Item added to inventory.");
+                return;
             }
         }
+
+        Debug.Log("Inventory is full.");
+    }
+
+    public void GiveRandomItem()
+    {
+        int randomIndex = Random.Range(0, items.Length);
+        AddItem(items[randomIndex]);
     }
 
     public void ToggleInventory()
@@ -70,7 +126,7 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventoryPanel.SetActive(InventoryOpen);
+        ToggleInventory();
     }
 
     // Update is called once per frame
