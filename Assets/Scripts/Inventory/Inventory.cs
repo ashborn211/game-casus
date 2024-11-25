@@ -9,10 +9,17 @@ public class Inventory : MonoBehaviour
     public Hotbar hotbar;
     public GameObject[] inventory;
     public InventorySlot ArmorSlot;
-    public int gold;
+    public int gold = 0;
+
+    [Header("Gold Text")]
+    public TMPro.TextMeshProUGUI goldText;
+
 
     [Header("Item List")]
     [SerializeField] private Item[] items;
+
+    [Header("Armor List")]
+    [SerializeField] private Item[] armorItems;
 
     private int selectedSlot = NOT_SELECTED;
 
@@ -63,7 +70,10 @@ public class Inventory : MonoBehaviour
 
     public void DeselectItem()
     {
-        Debug.Log("Deselecting item.");
+        if (selectedSlot == NOT_SELECTED)
+        {
+            return;
+        }
         GetSlot(selectedSlot).RemoveHighlight();
         selectedSlot = NOT_SELECTED;
 
@@ -121,6 +131,7 @@ public class Inventory : MonoBehaviour
     {
         InventoryOpen = !InventoryOpen;
         inventoryPanel.SetActive(InventoryOpen);
+        DeselectItem();
     }
 
     // Start is called before the first frame update
@@ -136,5 +147,7 @@ public class Inventory : MonoBehaviour
         {
             ToggleInventory();
         }
+
+        goldText.text = "Gold: " + gold;
     }
 }
