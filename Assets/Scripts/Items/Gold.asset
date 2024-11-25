@@ -16,7 +16,8 @@ MonoBehaviour:
   itemType: 5
   armorType: 0
   armorMaterial: 0
-  equipmentPrefab: {fileID: 0}
+  equipmentPrefab: {fileID: 62596655522181336, guid: 7f78fdc43bf6fe64f96c208dfedfd6a4,
+    type: 3}
   isValidItem: 1
   damage: 0
   amount: 1
