@@ -13,11 +13,11 @@ public class Health : MonoBehaviour
     private GameObject grandParent;
     public bool death { get; private set; } = false;
     private bool isPlayer = false;
-
     private GameObject gameOverScreenObject;
 
     private GameOverScreen gameOverScreen;
 
+    private MovementPlayer playerMovement;
     private HealthSlider healthSlider;
     // public HealtText healtText;
     // public HealthSlider healthSlider
@@ -26,16 +26,15 @@ public class Health : MonoBehaviour
     {
         objectGame = gameObject;
         parent = this.transform.parent.gameObject;
-        grandParent = this.transform.parent.gameObject;
-        if(grandParent.tag == "Player"){
+        if(parent.tag == "Player"){
             Debug.Log("player exists :3");
             isPlayer = true;
             healthSlider = GameObject.FindWithTag("HealthSlider").GetComponent<HealthSlider>();
             gameOverScreenObject = GameObject.FindWithTag("GameOverScreen");
+            playerMovement = parent.GetComponent<MovementPlayer>();
             if(gameOverScreenObject != null){
                 Debug.Log("gameOverScreenObject");
                 gameOverScreen = gameOverScreenObject.GetComponent<GameOverScreen>();
-                gameOverScreen?.Revive();
             }
         }
 
@@ -82,6 +81,8 @@ public class Health : MonoBehaviour
 
     public void Revive(){
         parent.SetActive(true);
+        SetHealthMaxHealth();
+        playerMovement?.Spawn();
         death = false;
     }
 
