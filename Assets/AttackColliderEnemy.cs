@@ -5,15 +5,15 @@ using UnityEngine;
 public class AttackColliderEnemy : MonoBehaviour
 {
     private MeshCollider boxCollider;
-    private int attackDamage = 3;
+    private int attackDamage = 3;//make it so it is via insatiate 
 
     private float update = 0.0f;
 
     private bool attackOnDelay = false;
 
-    private float attackLength = 1.125f;
+    private float attackLength = 1.125f;//make it so it is via insatiate 
 
-    private float attackDelay = 2.25f;
+    private float attackDelay = 2.25f;//make it so it is via insatiate 
 
     private EnemyAi1 enemyAi;
     private GameObject grandParent;
@@ -61,7 +61,7 @@ public class AttackColliderEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log(collider.name + " ----------------------------------------------------------------------------------------------------------------------");
+        Debug.Log(collider.tag + " ----------------------------------------------------------------------------------------------------------------------");
         if (collider.GetComponent<Health>() != null && !(update > attackLength))//the code !(update > attackLength) may create problems when attacking multiple targets. the code collider.GetComponent<Health>() != null may make freindly fire possible
         {
             Health health = collider.GetComponent<Health>();
