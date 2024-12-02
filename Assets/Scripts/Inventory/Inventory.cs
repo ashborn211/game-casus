@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     public static int NOT_SELECTED = -1;
 
-    public Hotbar hotbar;
+    public GameObject hotbar;
     public GameObject[] inventory;
     public InventorySlot ArmorSlot;
     public int gold = 0;
@@ -138,6 +138,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         ToggleInventory();
+        goldText.text = "" + gold;
     }
 
     // Update is called once per frame
@@ -148,6 +149,6 @@ public class Inventory : MonoBehaviour
             ToggleInventory();
         }
 
-        goldText.text = "Gold: " + gold;
+        goldText.text = "" + gold;
     }
 }
