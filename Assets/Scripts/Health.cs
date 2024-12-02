@@ -39,8 +39,6 @@ public class Health : MonoBehaviour
             healthSlider?.SetHealth(_health);
         }
     }
-    // public HealtText healtText;
-    // public HealthSlider healthSlider
     
     void Start()
     {
@@ -60,8 +58,6 @@ public class Health : MonoBehaviour
 
         maxHealth = baseHealth;
         health = maxHealth;
-        // healtText?.SetHealthText(health, maxHealth);
-        // healthSlider?.SetHealthSlider((float)health/(float)maxHealth*100f);
     }
     void Update()
     {
