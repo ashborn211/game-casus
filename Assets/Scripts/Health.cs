@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private int baseHealth = 10;
-    public int maxHealth;
-    private int health;
+    private int baseHealth = 10;  
     private GameObject objectGame;
     private GameObject parent;
     private GameObject grandParent;
@@ -19,6 +17,28 @@ public class Health : MonoBehaviour
 
     private MovementPlayer playerMovement;
     private HealthSlider healthSlider;
+    private int _maxHealth;
+    public int maxHealth{
+        get{ return _maxHealth; }
+        set{
+            _maxHealth = value;
+            healthSlider?.MaxSetHealth(_maxHealth);
+        }
+    }
+    private int _health;
+    private int health{
+        get { return _health; }
+        set 
+        { 
+            if(value > maxHealth){
+                _health = maxHealth;
+            }
+            else{
+                _health = value;
+            }
+            healthSlider?.SetHealth(_health);
+        }
+    }
     // public HealtText healtText;
     // public HealthSlider healthSlider
     
@@ -38,8 +58,8 @@ public class Health : MonoBehaviour
             }
         }
 
-        SetMaxHealth(baseHealth);
-        SetHealth(maxHealth);
+        maxHealth = baseHealth;
+        health = maxHealth;
         // healtText?.SetHealthText(health, maxHealth);
         // healthSlider?.SetHealthSlider((float)health/(float)maxHealth*100f);
     }
@@ -53,26 +73,7 @@ public class Health : MonoBehaviour
         }
     }
     public void ChangeHealth(int healthAmount){
-        SetHealth(health + healthAmount);
-    }
-
-    public void SetHealth(int healthAmount){
-        health = healthAmount;
-        if(health > maxHealth){
-            health = maxHealth;
-        }
-
-        healthSlider?.SetHealth(health);
-    }
-    public void SetMaxHealth(int healthAmount){
-        maxHealth = healthAmount;
-        if(health > maxHealth){
-            SetHealth(maxHealth);
-        }
-
-        healthSlider?.MaxSetHealth(healthAmount);
-        // healtText?.SetHealthText(health, maxHealth);
-        // healthSlider?.SetHealthSlider((float)health/(float)maxHealth*100f);
+        health += healthAmount;
     }
 
     public void SetHealthMaxHealth(){
@@ -86,11 +87,11 @@ public class Health : MonoBehaviour
         death = false;
     }
 
-    public int ChekHealth(){
+    public int CheckHealth(){
         return health;
     }
 
-    public int ChekMaxHealth(){
+    public int CheckMaxHealth(){
         return maxHealth;
     }
 }
