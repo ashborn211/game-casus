@@ -29914,7 +29914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   isEmpty: 1
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 44312439}
   button: {fileID: 1192933232}
   isSelected: 0
   hotbarFrame: {fileID: 246718490}
@@ -37315,7 +37315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   isEmpty: 1
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 228379763}
   button: {fileID: 1516607501}
   isSelected: 0
   hotbarFrame: {fileID: 287717348}
@@ -46102,7 +46102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   isEmpty: 1
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 2035913645}
   button: {fileID: 1810561601}
   isSelected: 0
   hotbarFrame: {fileID: 144687831}
@@ -46360,7 +46360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   isEmpty: 1
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 1609742291}
   button: {fileID: 1828154166}
   isSelected: 0
   hotbarFrame: {fileID: 1744568170}
@@ -51311,7 +51311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   isEmpty: 1
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 16665703}
   button: {fileID: 1982675365}
   isSelected: 1
   hotbarFrame: {fileID: 807889921}
