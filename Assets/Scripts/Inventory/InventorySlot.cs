@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Item item = null;
     public bool isEmpty = true;
+    private bool isHovered = false;
 
     [Header("Sprite Renderer")]
     public GameObject spriteRenderer;
@@ -26,7 +28,6 @@ public class InventorySlot : MonoBehaviour
         isEmpty = false;
 
         Debug.Log("Item added to slot: " + newItem.name);
-        // Update the sprite here
         SetSprite();
         return true;
     }
@@ -39,38 +40,35 @@ public class InventorySlot : MonoBehaviour
             return;
         }
 
-        //Clear the sprite here
         Debug.Log($"[InventorySlot] Item removed: {item.name} from slot {gameObject.name}");
         item = null;
         isEmpty = true;
         SetSprite();
     }
 
-    //Method to update the sprite
     public void SetSprite()
     {
         if (spriteRenderer == null)
         {
             Debug.LogWarning($"[InventorySlot] spriteRenderer is not assigned on slot {gameObject.name}.");
-            return; // Cannot update sprite without a renderer
+            return;
         }
 
         Debug.Log($"[InventorySlot] Updating sprite for slot {gameObject.name}...");
 
-        // Check if the spriteRenderer has a UI Image component
         Image imageComponent = spriteRenderer.GetComponent<Image>();
         if (imageComponent != null)
         {
             if (item != null && item.sprite != null)
             {
-                imageComponent.sprite = item.sprite; // Set the sprite
-                imageComponent.color = Color.white; //  sprite is visible
+                imageComponent.sprite = item.sprite;
+                imageComponent.color = Color.white;
                 Debug.Log($"[InventorySlot] Sprite set to {item.sprite.name} on slot {gameObject.name}");
             }
             else
             {
                 imageComponent.sprite = null;
-                imageComponent.color = new Color(1, 1, 1, 0); // Make it invisible
+                imageComponent.color = new Color(1, 1, 1, 0);
                 Debug.Log($"[InventorySlot] Sprite cleared on slot {gameObject.name}");
             }
         }
@@ -90,9 +88,23 @@ public class InventorySlot : MonoBehaviour
         button.image.color = Color.white;
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        isHovered = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        isHovered = false;
+    }
+
+    public bool IsHovered()
+    {
+        return isHovered;
+    }
+
     void Start()
     {
         SetSprite();
     }
-
 }

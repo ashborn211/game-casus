@@ -14,14 +14,13 @@ public class Inventory : MonoBehaviour
     [Header("Gold Text")]
     public TMPro.TextMeshProUGUI goldText;
 
-
     [Header("Item List")]
     [SerializeField] private Item[] items;
 
     [Header("Armor List")]
     [SerializeField] private Item[] armorItems;
 
-    private int selectedSlot = NOT_SELECTED;
+    public int selectedSlot = NOT_SELECTED;
 
     public GameObject inventoryPanel;
     public bool InventoryOpen = false;
@@ -50,7 +49,7 @@ public class Inventory : MonoBehaviour
         {
             if (!clickedSlot.AddItem(GetItem(selectedSlot)))
             {
-              return;
+                return;
             }
             GetSlot(selectedSlot).RemoveItem();
             GetSlot(selectedSlot).RemoveHighlight();
@@ -76,7 +75,6 @@ public class Inventory : MonoBehaviour
         }
         GetSlot(selectedSlot).RemoveHighlight();
         selectedSlot = NOT_SELECTED;
-
     }
 
     public InventorySlot GetSlot(int slot)
@@ -106,7 +104,6 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item)
     {
-        // Add the item to the first empty slot
         for (int i = 0; i < inventory.Length; i++)
         {
             InventorySlot slot = inventory[i].GetComponent<InventorySlot>();
@@ -119,6 +116,27 @@ public class Inventory : MonoBehaviour
         }
 
         Debug.Log("Inventory is full.");
+    }
+
+    public void AddItemToHotbar(Item item, int hotbarSlot)
+    {
+        if (hotbar.GetComponent<Hotbar>().AddItemToHotbar(item, hotbarSlot))
+        {
+            // Find the slot containing the item and remove it
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                InventorySlot slot = inventory[i].GetComponent<InventorySlot>();
+                if (slot.item == item)
+                {
+                    slot.RemoveItem();
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Failed to add item to hotbar.");
+        }
     }
 
     public void GiveRandomItem()
@@ -134,14 +152,12 @@ public class Inventory : MonoBehaviour
         DeselectItem();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         ToggleInventory();
         goldText.text = "" + gold;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -150,5 +166,33 @@ public class Inventory : MonoBehaviour
         }
 
         goldText.text = "" + gold;
+
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            InventorySlot slot = inventory[i].GetComponent<InventorySlot>();
+            if (slot.IsHovered())
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    AddItemToHotbar(slot.item, 0);
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    AddItemToHotbar(slot.item, 1);
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    AddItemToHotbar(slot.item, 2);
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    AddItemToHotbar(slot.item, 3);
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha5))
+                {
+                    AddItemToHotbar(slot.item, 4);
+                }
+            }
+        }
     }
 }
