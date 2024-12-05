@@ -10,17 +10,18 @@ public class WeaponHandeler : MonoBehaviour
     [System.Serializable]
     public struct WeaponModel {//change because vars only need to be get after being set
         public GameObject Model;
-        public int Id ;
+        public int Id;
+        public float YOffset;
+        public float XOffset;
+        public float ZOffset;
     }
 
     [SerializeField]
     public WeaponModel[] weaponModels;
     public GameObject spawnedWeapon;
-
-    float update = 0;
     void Start()
     {
-
+        // SetWeapon(1);
     }
 
     void Update()
@@ -36,6 +37,6 @@ public class WeaponHandeler : MonoBehaviour
         WeaponModel weaponModel = Array.Find(weaponModels , m => m.Id == id);//add check
         spawnedWeapon = Instantiate(weaponModel.Model);
         spawnedWeapon.transform.SetParent(this.transform);
-        spawnedWeapon.transform.localPosition = new Vector3(0, 0, 0);
+        spawnedWeapon.transform.localPosition = new Vector3(weaponModel.XOffset, weaponModel.YOffset, weaponModel.ZOffset);
     }
 }
