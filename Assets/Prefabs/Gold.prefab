@@ -61,7 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d9628ad0b690243b2770593a62c3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldAmount: 1
+  goldScriptableObject: {fileID: 11400000, guid: 02cd9a38279b9584b8f72290a1efc5e2,
+    type: 2}
 --- !u!65 &-1540074880625032937
 BoxCollider:
   m_ObjectHideFlags: 0

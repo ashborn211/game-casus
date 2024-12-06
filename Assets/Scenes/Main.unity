@@ -27164,9 +27164,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885226047427129422, guid: 7f78fdc43bf6fe64f96c208dfedfd6a4,
         type: 3}
-      propertyPath: inventory
+      propertyPath: goldScriptableObject
       value: 
-      objectReference: {fileID: 56703582}
+      objectReference: {fileID: 11400000, guid: 02cd9a38279b9584b8f72290a1efc5e2,
+        type: 2}
     - target: {fileID: 7745102215973210817, guid: 7f78fdc43bf6fe64f96c208dfedfd6a4,
         type: 3}
       propertyPath: m_LocalPosition.x
