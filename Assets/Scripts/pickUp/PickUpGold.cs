@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PickUpGold : MonoBehaviour
 {
-    public Item goldScriptableObject; 
+    public Item goldScriptableObject;
 
     private Inventory inventory;
 
     void Start()
     {
         inventory = FindObjectOfType<Inventory>();
+        
         if (inventory == null)
         {
             Debug.LogError("Inventory script not found in the scene!");
