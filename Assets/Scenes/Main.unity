@@ -27162,6 +27162,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gold
       objectReference: {fileID: 0}
+    - target: {fileID: 4885226047427129422, guid: 7f78fdc43bf6fe64f96c208dfedfd6a4,
+        type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 56703582}
     - target: {fileID: 7745102215973210817, guid: 7f78fdc43bf6fe64f96c208dfedfd6a4,
         type: 3}
       propertyPath: m_LocalPosition.x
