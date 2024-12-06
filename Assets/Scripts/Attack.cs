@@ -39,7 +39,6 @@ public class Attack : MonoBehaviour
                 if(currentAngel > targetAngel || currentAngel+rotationSpeedTick < targetAngel){
                     mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
                 }
-                Debug.Log("a");
             }
             else{
                 currentAngel += rotationSpeedTick;
@@ -47,7 +46,6 @@ public class Attack : MonoBehaviour
                 if(currentAngel < targetAngel || currentAngel-rotationSpeedTick > targetAngel){
                     mc.localRotation = Quaternion.Euler(0, currentAngel, 0);
                 }
-                Debug.Log("b");
             }
         }
     }
