@@ -21,18 +21,18 @@ public class EnemyDrop : MonoBehaviour
             }
 
             // Spawn optional drops (example: 2 optional drops)
-            var optionalDrops = LootTable.GetOptionalDrops(2);
-            foreach (var drop in optionalDrops)
-            {
-                Instantiate(drop, transform.position, transform.rotation);
-            }
+            // var optionalDrops = LootTable.GetOptionalDrops();
+            // foreach (var drop in optionalDrops)
+            // {
+            //     Instantiate(drop, transform.position, transform.rotation);
+            // }
 
-            // Spawn both guaranteed and optional drops (example: 2 items)
-            var combinedDrops = LootTable.GetGuaranteedAndOptionalDrops(2);
-            foreach (var drop in combinedDrops)
-            {
-                Instantiate(drop, transform.position, transform.rotation);
-            }
+            // // Spawn both guaranteed and optional drops (example: 2 items)
+            // var combinedDrops = LootTable.GetGuaranteedAndOptionalDrops();
+            // foreach (var drop in combinedDrops)
+            // {
+            //     Instantiate(drop, transform.position, transform.rotation);
+            // }
         }
         else
         {
