@@ -342,6 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7874495602343347857}
   - component: {fileID: 7983763567190114034}
+  - component: {fileID: 1514700377672893796}
   - component: {fileID: -7845869176343704508}
   m_Layer: 0
   m_Name: Sword
@@ -383,6 +384,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedScriptableObject: {fileID: 11400000, guid: d0f7a0fcd9fa26a4ba161a461a2cc713,
     type: 2}
+--- !u!114 &1514700377672893796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7909194371538409414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a9d501ba8567a4aa01c535b0c09552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToPickUp: {fileID: 11400000, guid: d0f7a0fcd9fa26a4ba161a461a2cc713, type: 2}
 --- !u!65 &-7845869176343704508
 BoxCollider:
   m_ObjectHideFlags: 0

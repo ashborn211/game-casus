@@ -16,5 +16,8 @@ MonoBehaviour:
   - MinCount: 2
     MaxCount: 5
     Drop: {fileID: 62596655522181336, guid: 7f78fdc43bf6fe64f96c208dfedfd6a4, type: 3}
+  - MinCount: 1
+    MaxCount: 1
+    Drop: {fileID: 7909194371538409414, guid: 9aebfe375422fee4789083745f32716c, type: 3}
   OptionalDrops: []
-  NoDropWeight: 100
+  NoDropWeight: 0
