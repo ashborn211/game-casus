@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PickUpGold : MonoBehaviour
 {
-    public Item goldScriptableObject; // Reference to the Gold ScriptableObject
+    public Item goldScriptableObject; 
 
     private Inventory inventory;
 
@@ -17,10 +17,8 @@ public class PickUpGold : MonoBehaviour
 
     void OnMouseDown()
     {
-        // Check if the Gold ScriptableObject and Inventory are assigned
         if (goldScriptableObject != null && inventory != null)
         {
-            // Add the gold amount from the ScriptableObject to the player's inventory
             inventory.AddGold(goldScriptableObject.amount);
             Debug.Log("Gold Added: " + goldScriptableObject.amount);
         }
@@ -29,7 +27,6 @@ public class PickUpGold : MonoBehaviour
             Debug.LogWarning("Gold ScriptableObject or Inventory is not assigned or found!");
         }
 
-        // Destroy the gold object after it has been picked up
         Destroy(gameObject);
     }
 }
