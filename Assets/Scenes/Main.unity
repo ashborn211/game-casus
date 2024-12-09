@@ -45707,6 +45707,7 @@ GameObject:
   - component: {fileID: 1803649429}
   - component: {fileID: 1803649428}
   - component: {fileID: 1803649427}
+  - component: {fileID: 1803649430}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -45726,7 +45727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79465a8a1024ec0418de4ede325a5ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementPlayer: {fileID: 0}
+  movementPlayer: {fileID: 377191907}
   movementSpeed: 9.5
 --- !u!54 &1803649428
 Rigidbody:
@@ -45771,6 +45772,22 @@ Transform:
   - {fileID: 1579493233}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1803649430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803649426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5496f3258ec601e4b9f482a13ba3f016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropSlots:
+  - {fileID: 7745102215973210817, guid: 7f78fdc43bf6fe64f96c208dfedfd6a4, type: 3}
+  - {fileID: 7874495602343347857, guid: 9aebfe375422fee4789083745f32716c, type: 3}
+  LootTable: {fileID: 11400000, guid: c4ea4d5a4ebfcb24fbf3aa1f18c801ad, type: 2}
 --- !u!1 &1803655825
 GameObject:
   m_ObjectHideFlags: 0
@@ -53384,7 +53401,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
