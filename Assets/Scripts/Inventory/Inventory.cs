@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     public GameObject hotbar;
     public GameObject[] inventory;
     public InventorySlot ArmorSlot;
-    public int gold = 0;
+    public ulong gold = 0;
 
     [Header("Gold Text")]
     public TMPro.TextMeshProUGUI goldText;
@@ -94,12 +94,12 @@ public class Inventory : MonoBehaviour
 
     public void AddGold(int amount)
     {
-        gold += amount;
+        this.gold = this.gold + (ulong)amount;
     }
 
     public void RemoveGold(int amount)
     {
-        gold -= amount;
+        this.gold = this.gold - (ulong)amount;
     }
 
     public void AddItem(Item item)
@@ -155,7 +155,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         ToggleInventory();
-        goldText.text = "" + gold;
+        goldText.text = gold.ToString("N0");
     }
 
     void Update()
