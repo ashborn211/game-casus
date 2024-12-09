@@ -80,7 +80,7 @@ public class AttackColliderSword : MonoBehaviour
                 modelMovement.PlayAttackAnimationToRight();
                 rightSlash = true;
             }
-            Debug.Log(modelMovement);
+            Debug.Log("[" + this + "] " + modelMovement);
             attackOnDelay = true;
             boxCollider.enabled = true;
             update = 0;
@@ -112,12 +112,12 @@ public class AttackColliderSword : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log(collider.name + "----------------------------------------------------------------------------------------------------------------------");
+        Debug.Log("[" + this + "] collided with " + collider.name + " " + collider.tag);
         if (collider.GetComponent<Health>() != null && !(update > attackLength))// the code && !(update > attackLength) may create problems when attacking multiple targets
         {
             Health health = collider.GetComponent<Health>();
             health.ChangeHealth(attackDamage * -1);
-            Debug.Log("wow");
+            Debug.Log("[" + this + "] successfully attacked " + collider.name + " " + collider.tag);
         }
     }
 

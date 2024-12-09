@@ -10,7 +10,6 @@ public class Health : MonoBehaviour
     private GameObject parent;
     private GameObject grandParent;
     public bool death { get; private set; } = false;
-    private bool isPlayer = false;
     private GameOverScreen gameOverScreen;
     private EnemyDrop enemyDropScript;
     private MovementPlayer playerMovement;
@@ -53,7 +52,6 @@ public class Health : MonoBehaviour
         if (parent.tag == "Player")
         {
             Debug.Log("[" + this + "] player exists :3");
-            isPlayer = true;
             try{
                 healthSlider = GameObject.FindWithTag("HealthSlider").GetComponent<HealthSlider>();
             }

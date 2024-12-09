@@ -13,7 +13,6 @@ public class Attack : MonoBehaviour
     private float currentAngel = 0.0f;
 
     private float rotationSpeedTick = 0.0f;
-    private bool clockwise = true;
     private float rotationSpeed = 360.0f; //per sec
     void Start()
     {
