@@ -62,30 +62,37 @@ public class Hotbar : MonoBehaviour
     {
         if (!inventory.GetComponent<Inventory>().InventoryOpen)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            switch (Input.inputString)
             {
-                Debug.Log("Selected Slot 1");
-                SetSelectedSlot(0);
+                case "1":
+                    Debug.Log("Selected Slot 1");
+                    SetSelectedSlot(0);
+                    break;
+                case "2":
+                    Debug.Log("Selected Slot 2");
+                    SetSelectedSlot(1);
+                    break;
+                case "3":
+                    Debug.Log("Selected Slot 3");
+                    SetSelectedSlot(2);
+                    break;
+                case "4":
+                    Debug.Log("Selected Slot 4");
+                    SetSelectedSlot(3);
+                    break;
+                case "5":
+                    Debug.Log("Selected Slot 5");
+                    SetSelectedSlot(4);
+                    break;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
-                Debug.Log("Selected Slot 2");
-                SetSelectedSlot(1);
+                SetSelectedSlot((selectedSlot + 1) % hotbar.Length);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
             {
-                Debug.Log("Selected Slot 3");
-                SetSelectedSlot(2);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                Debug.Log("Selected Slot 4");
-                SetSelectedSlot(3);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                Debug.Log("Selected Slot 5");
-                SetSelectedSlot(4);
+                SetSelectedSlot((selectedSlot - 1 + hotbar.Length) % hotbar.Length);
             }
         }
     }
