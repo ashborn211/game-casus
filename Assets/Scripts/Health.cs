@@ -11,13 +11,11 @@ public class Health : MonoBehaviour
     private GameObject grandParent;
     public bool death { get; private set; } = false;
     private bool isPlayer = false;
-    private GameObject gameOverScreenObject;
-
     private GameOverScreen gameOverScreen;
-    private EnemyDrop enemyDropScript;  // Reference to the EnemyDrop script
-
+    private EnemyDrop enemyDropScript;
     private MovementPlayer playerMovement;
     private HealthSlider healthSlider;
+
     private int _maxHealth;
     public int maxHealth
     {
@@ -28,6 +26,7 @@ public class Health : MonoBehaviour
             healthSlider?.MaxSetHealth(_maxHealth);
         }
     }
+
     private int _health;
     private int health
     {
@@ -45,54 +44,54 @@ public class Health : MonoBehaviour
             healthSlider?.SetHealth(_health);
         }
     }
-    // public HealtText healtText;
-    // public HealthSlider healthSlider
-    private void Awake()
+
+    // Awake is called before the Start
+    void Awake()
     {
-        // Optionally, get parent reference if not set in Inspector
-        if (parent == null)
-        {
-            parent = transform.parent.gameObject;  // Automatically get the parent GameObject
-        }
-
-        // Get the EnemyDrop script from the parent GameObject
-        enemyDropScript = parent.GetComponent<EnemyDrop>();
-
-        // Check if the EnemyDrop component exists on the parent
-        if (enemyDropScript == null)
-        {
-            Debug.LogError("EnemyDrop component not found on parent!");
-        }
-    }
-    void Start()
-    {
-
         objectGame = gameObject;
         parent = this.transform.parent.gameObject;
         if (parent.tag == "Player")
         {
-            Debug.Log("player exists :3");
+            Debug.Log("[" + this + "] player exists :3");
             isPlayer = true;
-            healthSlider = GameObject.FindWithTag("HealthSlider").GetComponent<HealthSlider>();
-            gameOverScreenObject = GameObject.FindWithTag("GameOverScreen");
+            try{
+                healthSlider = GameObject.FindWithTag("HealthSlider").GetComponent<HealthSlider>();
+            }
+            catch{
+                Debug.LogError("[" + this + "] healthSlider could not be set 3:");
+            }
             playerMovement = parent.GetComponent<MovementPlayer>();
-            if (gameOverScreenObject != null)
+            try{
+                gameOverScreen =  GameObject.FindWithTag("GameOverScreen").GetComponent<GameOverScreen>();
+            }
+            catch{
+                Debug.LogError("[" + this + "] gameOverScreen could not be set 3:");
+            }
+                
+        }
+        else{
+            enemyDropScript = parent.GetComponent<EnemyDrop>();
+
+            if (enemyDropScript == null)
             {
-                Debug.Log("gameOverScreenObject");
-                gameOverScreen = gameOverScreenObject.GetComponent<GameOverScreen>();
+                Debug.LogError("[" + this + "] EnemyDrop component not found on parent");
             }
         }
-
-        maxHealth = baseHealth;
-        health = maxHealth;
-        // healtText?.SetHealthText(health, maxHealth);
-        // healthSlider?.SetHealthSlider((float)health/(float)maxHealth*100f);
     }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        maxHealth = baseHealth;
+        SetHealthMaxHealth();
+    }
+
+    // Update is called once per frame
     void Update()
     {
         if (health <= 0 && !death)
         {
-            Debug.Log(objectGame.name + " death ---------------------------------------------------------------------");
+            Debug.Log("[" + this + "] " + parent.tag + " death");
             if (parent.tag != "Player")
             {
                 enemyDropScript.ItemDrop();
@@ -103,6 +102,7 @@ public class Health : MonoBehaviour
 
         }
     }
+
     public void ChangeHealth(int healthAmount)
     {
         health += healthAmount;

@@ -7,21 +7,18 @@ using Unity.VisualScripting;
 
 public class GameOverScreen : MonoBehaviour
 {
-    GameObject deathTextObject , respawnButtonObject , playerCapsule;
-    TMP_Text deathText;
+    GameObject respawnButtonObject , playerCapsule;
     Button respawnButton;
     Health playerHealth;
+    
     // Start is called before the first frame update
     void Start()
     {
-        deathTextObject = GameObject.FindWithTag("DeathMessage");
         respawnButtonObject = GameObject.FindWithTag("RespawnButton");
         playerCapsule = GameObject.FindWithTag("PlayerCapsule");
         playerHealth = playerCapsule.GetComponent<Health>();
-        deathText = deathTextObject.GetComponent<TMP_Text>();
         respawnButton = respawnButtonObject.GetComponent<Button>();
         respawnButton.onClick.AddListener(RespawnPlayer);
-        deathText.text = "You skibidi beta have no rizz, we will send you back to ohio.";
         Revive();
     }
 

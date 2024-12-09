@@ -57,6 +57,7 @@ public class EnemyAi1 : MonoBehaviour
         float adjacent;
         float opposite;
         float result;
+
         if (x1 > x2){
             adjacent = x1 - x2;
         }
@@ -87,6 +88,7 @@ public class EnemyAi1 : MonoBehaviour
                 result = ((Mathf.Atan(adjacent/opposite))*(180/Mathf.PI))+90;
             }
         }
+        
         return result;
     }
 
@@ -94,6 +96,7 @@ public class EnemyAi1 : MonoBehaviour
         float adjacent;
         float opposite;
         float result;
+
         if (x1 > x2){
             adjacent = x1 - x2;
         }
@@ -107,6 +110,7 @@ public class EnemyAi1 : MonoBehaviour
         else {
             opposite = y2 - y1;
         }
+
         result = MathF.Sqrt(adjacent*adjacent + opposite*opposite);
         return result;
     }
