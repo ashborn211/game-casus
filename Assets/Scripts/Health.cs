@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private int baseHealth = 10;  
+    public int baseHealth;  
     private GameObject objectGame;
     private GameObject parent;
     private GameObject grandParent;
