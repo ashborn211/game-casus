@@ -79,11 +79,11 @@ public class HotbarSlot : InventorySlot, IPointerClickHandler
     void Start()
     {
         SetActiveSlot(isSelected);
+        SetSprite();
     }
 
     void Update()
     {
         SetActiveSlot(isSelected);
-        SetSprite();
     }
 }
