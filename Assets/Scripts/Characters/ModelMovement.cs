@@ -38,14 +38,11 @@ public class ModelMovement : MonoBehaviour
         }
     }
 
-    public void PlayAttackAnimation(){
-        if (animator.GetBool("firstAttack")){
-            animator.SetTrigger("attack");
-            animator.SetBool("firstAttack", false);
-        }
-        if (!animator.GetBool("firstAttack")){
-            animator.SetTrigger("attack");
-            animator.SetBool("firstAttack", true);
-        }
+    public void PlayAttackAnimationToLeft(){
+        animator.SetTrigger("AttackToTheLeft");
+    }
+
+    public void PlayAttackAnimationToRight(){
+        animator.SetTrigger("AttackToTheRight");
     }
 }

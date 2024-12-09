@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run-player
-      takeName: Run-player
-      internalID: -3597635613433425717
+      name: Idle
+      takeName: Idle
+      internalID: -3100369314251171874
       firstFrame: 0
-      lastFrame: 12
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -62,11 +62,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idle
-      takeName: Idle
-      internalID: -3100369314251171874
+      name: Run-player
+      takeName: Run-player
+      internalID: -3597635613433425717
       firstFrame: 0
-      lastFrame: 30
+      lastFrame: 12
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

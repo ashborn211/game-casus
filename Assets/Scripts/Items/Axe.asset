@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   sprite: {fileID: -1345518822, guid: 383aef37898fa624db3efdbee6c0df52, type: 3}
-  itemTag: 0
-  equipmentPrefab: {fileID: 0}
+  itemType: 0
+  armorType: 0
+  armorMaterial: 0
+  equipmentPrefab: {fileID: 6920209260620313802, guid: 692d58ed259ec614ba3ab629f899689d,
+    type: 3}
   isValidItem: 1
   damage: 25
+  amount: 0

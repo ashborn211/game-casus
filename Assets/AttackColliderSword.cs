@@ -26,13 +26,18 @@ public class AttackColliderSword : MonoBehaviour
 
     private float update = 0.0f;
 
+    private float update2 = 0.0f;
+
+    private float margin = 0.5f;
+
     private bool attackOnDelay = false;
 
-    private float attackDelay = 0.5f;
+    private float attackDelay = 0.6f;
     private float attackLength = 0.2f;
 
     private MeshFilter meshFilter; //for debugging
 
+    private bool rightSlash = true;
     public enum WeaponType
     {
         sword = 0,
@@ -57,10 +62,25 @@ public class AttackColliderSword : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!rightSlash){
+            update2+=Time.deltaTime;
+            if(update2 > attackDelay+margin){
+                rightSlash = true;
+            }
+        }
+
         if (Input.GetButtonDown("Fire1") && !attackOnDelay)
         {
+            if(rightSlash){
+                modelMovement.PlayAttackAnimationToLeft();
+                rightSlash = false;
+                update2 = 0.0f;
+            }
+            else{
+                modelMovement.PlayAttackAnimationToRight();
+                rightSlash = true;
+            }
             Debug.Log(modelMovement);
-            modelMovement.PlayAttackAnimation();
             attackOnDelay = true;
             boxCollider.enabled = true;
             update = 0;
@@ -69,7 +89,6 @@ public class AttackColliderSword : MonoBehaviour
         }
         else if(attackOnDelay){
             update+=Time.deltaTime;
-            // Debug.Log(update);
             if (update > attackLength){
                 boxCollider.enabled = false;
             }
@@ -131,7 +150,6 @@ public class AttackColliderSword : MonoBehaviour
                 meshFilter.mesh= spearCollider0; //for debugging
             }
             weaponType = type;
-            Debug.Log(weaponSize);
             SetWeaponSizeForWeapon(weaponSize);
             
         }
