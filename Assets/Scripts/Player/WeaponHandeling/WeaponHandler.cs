@@ -20,26 +20,36 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField]
     public WeaponModel[] weaponModels;
     public GameObject spawnedWeapon;
+
     void Start()
     {
-        SetWeapon(1);
+        // SetWeapon(1);
     }
 
     void Update()
     {
-        
+
     }
 
     public void SetWeapon(int id)
     {
+        EmptyHand();
+        try{
+            WeaponModel weaponModel = Array.Find(weaponModels , m => m.Id == id);//add check
+            spawnedWeapon = Instantiate(weaponModel.Model);
+            spawnedWeapon.transform.SetParent(this.transform);
+            spawnedWeapon.transform.localPosition = new Vector3(weaponModel.XOffset, weaponModel.YOffset, weaponModel.ZOffset);
+            spawnedWeapon.transform.localRotation = Quaternion.Euler(0,0,0);
+        }
+        catch{
+            Debug.LogError("[" + this + "] Could't not spawn target weapon successfully 3:");
+        }
+    }
+
+    public void EmptyHand(){
         foreach(Transform child in transform){
             GameObject.Destroy(child.gameObject);
         }
-        WeaponModel weaponModel = Array.Find(weaponModels , m => m.Id == id);//add check
-        spawnedWeapon = Instantiate(weaponModel.Model);
-        spawnedWeapon.transform.SetParent(this.transform);
-        spawnedWeapon.transform.localPosition = new Vector3(weaponModel.XOffset, weaponModel.YOffset, weaponModel.ZOffset);
-        spawnedWeapon.transform.localRotation = Quaternion.Euler(0,0,0);
     }
 }
 
