@@ -6,10 +6,16 @@ using UnityEngine.UI;
 public class HealthSlider : MonoBehaviour
 {
     private Slider slider;
+
+    // Awake is called before the Start
+    void Awake (){
+        slider = GetComponent<Slider>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        slider = GetComponent<Slider>();
+        
     }
 
     // Update is called once per frame

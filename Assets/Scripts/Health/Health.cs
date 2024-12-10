@@ -22,7 +22,13 @@ public class Health : MonoBehaviour
         set
         {
             _maxHealth = value;
-            healthSlider?.MaxSetHealth(_maxHealth);
+            try{
+                healthSlider?.MaxSetHealth(_maxHealth);
+            }
+            catch{
+                Debug.LogError("[" + this + "] healthSlider [" + healthSlider + "] max health could not be set to " + _maxHealth + " 3:");
+            }
+            
         }
     }
 
@@ -40,7 +46,13 @@ public class Health : MonoBehaviour
             {
                 _health = value;
             }
-            healthSlider?.SetHealth(_health);
+            try{
+                healthSlider?.SetHealth(_health);
+            }
+            catch{
+                Debug.LogError("[" + this + "] healthSlider at [" + healthSlider + "] health could not be set to " + _health + " 3:");
+            }
+            
         }
     }
 
