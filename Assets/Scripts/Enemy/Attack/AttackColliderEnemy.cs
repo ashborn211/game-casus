@@ -12,6 +12,7 @@ public class AttackColliderEnemy : MonoBehaviour
     private float attackDelay = 2.25f;//make it so it is via insatiate 
     private EnemyAi1 enemyAi;
     private GameObject grandParent;
+    private CrabEnemyAnimations crabEnemyAnimations;
     public bool inAttack { get; private set; } = false;
     
     // Start is called before the first frame update
@@ -47,6 +48,8 @@ public class AttackColliderEnemy : MonoBehaviour
             attackOnDelay = true;
             boxCollider.enabled = true;
             update = 0;
+            crabEnemyAnimations.PlayAttackAnimationCrab();
+
         }
         else{
             boxCollider.enabled = false;
