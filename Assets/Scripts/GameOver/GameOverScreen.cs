@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameOverScreen : MonoBehaviour
 {
@@ -37,7 +38,6 @@ public class GameOverScreen : MonoBehaviour
     }
 
     public void RespawnPlayer(){
-        playerHealth.Revive();
-        Revive();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
