@@ -18,7 +18,6 @@ public class ModelMovement : MonoBehaviour
     {
         mc = transform.parent;
         animator = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame

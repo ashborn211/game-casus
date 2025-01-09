@@ -9,7 +9,7 @@ public class EnemyAi1 : MonoBehaviour
     public MovementPlayer movementPlayer;
 
     public float test2 { get; private set; } = 0;//distance from player rename variable
-    public float movementSpeed = (float)6.0;
+    public float movementSpeed;
 
     private Vector3 velocity;
     
@@ -35,14 +35,6 @@ public class EnemyAi1 : MonoBehaviour
     void Update()
     {
         angel = Angle(transform.position.x, transform.position.z, movementPlayer.transform.position.x, movementPlayer.transform.position.z)-270;
-        if (rb.position.y <= 2.8)
-        {
-            movementSpeed = 4.5f;
-        }
-        else
-        {
-            movementSpeed = 6.0f;
-        }
         test2 = Distance(transform.position.x, transform.position.z, movementPlayer.transform.position.x, movementPlayer.transform.position.z);
         if((test2 > 1.5f) && (test2 < 20.0f) && !attackColliderEnemy.inAttack){
             rb.velocity = Vel();
