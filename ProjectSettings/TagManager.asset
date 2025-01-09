@@ -9,6 +9,7 @@ TagManager:
   - GameOverScreen
   - RespawnButton
   - PlayerCapsule
+  - CrabModel
   layers:
   - Default
   - TransparentFX

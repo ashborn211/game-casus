@@ -8,7 +8,7 @@ public class CrabEnemyAnimations : MonoBehaviour
 
     private Animator animator;
 
-    private Rigidbody rigidbody;
+    private Rigidbody _rigidbody;
 
     private GameObject grandParent;
     private GameObject parent;
@@ -19,19 +19,21 @@ public class CrabEnemyAnimations : MonoBehaviour
         parent = this.transform.parent.gameObject;
         grandParent = parent.transform.parent.gameObject;
 
-        rigidbody.GetComponent<Rigidbody>();
+        _rigidbody = grandParent.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (rigidbody.velocity.x != 0 | rigidbody.velocity.z != 0)
+        if (_rigidbody.velocity.x >= 0.1 || _rigidbody.velocity.x <= -0.1 || _rigidbody.velocity.z >= 0.1 || _rigidbody.velocity.z <= -0.1)
         {
             animator.SetFloat("speed", 1);
+            Debug.Log("1 x:" + _rigidbody.velocity.x + " z: " + _rigidbody.velocity.z);
         }
         else
         {
             animator.SetFloat("speed", 0);
+            Debug.Log("0 x:" + _rigidbody.velocity.x + " z: " + _rigidbody.velocity.z);
         }
     }
 

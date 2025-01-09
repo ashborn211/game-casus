@@ -21,6 +21,7 @@ public class AttackColliderEnemy : MonoBehaviour
         grandParent = (this.transform.parent.gameObject).transform.parent.gameObject;
         enemyAi = grandParent.GetComponent<EnemyAi1>();
         boxCollider = GetComponent<MeshCollider>();
+        crabEnemyAnimations = GameObject.FindWithTag("CrabModel").transform.GetComponent<CrabEnemyAnimations>();
     }
 
     // Update is called once per frame
