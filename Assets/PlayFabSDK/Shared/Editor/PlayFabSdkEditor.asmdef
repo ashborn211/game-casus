@@ -1,7 +1,8 @@
 {
     "name": "PlayFabSDKEditor",
+    "rootNamespace": "",
     "references": [
-        "PlayFab"
+        "GUID:0da6d172d18a54e4389d0dce1e1ffdf2"
     ],
     "includePlatforms": [
         "Editor"
@@ -12,5 +13,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }
